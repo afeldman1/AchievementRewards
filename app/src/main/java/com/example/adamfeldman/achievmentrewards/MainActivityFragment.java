@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -25,6 +27,10 @@ public class MainActivityFragment extends Fragment {
     private TextView myTextView;
 
     private CallbackManager myCallbackManager;
+
+    private AccessTokenTracker myTokenTracker;
+    private ProfileTracker myProfileTracker;
+
     private FacebookCallback<LoginResult> myCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
@@ -32,7 +38,6 @@ public class MainActivityFragment extends Fragment {
             Profile profile = Profile.getCurrentProfile();
 
             displayWelcomeMessage(profile);
-
         }
 
         @Override
@@ -60,6 +65,20 @@ public class MainActivityFragment extends Fragment {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         myCallbackManager = CallbackManager.Factory.create();
+        myTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+
+            }
+        };
+        myProfileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                displayWelcomeMessage(currentProfile);
+            }
+        };
+        myTokenTracker.startTracking();
+        myProfileTracker.startTracking();
     }
 
     @Override
@@ -84,6 +103,14 @@ public class MainActivityFragment extends Fragment {
         super.onResume();
         Profile profile = Profile.getCurrentProfile();
         displayWelcomeMessage(profile);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        myTokenTracker.stopTracking();
+        myProfileTracker.stopTracking();
     }
 
     @Override

@@ -13,7 +13,7 @@
         android:id="@+id/ha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:text="Please Sign in"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
