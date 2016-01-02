@@ -19,6 +19,8 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.Arrays;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -31,6 +33,8 @@ public class MainActivityFragment extends Fragment {
     private AccessTokenTracker myTokenTracker;
     private ProfileTracker myProfileTracker;
 
+    private CurrentUser currUser;
+
     private FacebookCallback<LoginResult> myCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
@@ -38,6 +42,7 @@ public class MainActivityFragment extends Fragment {
             Profile profile = Profile.getCurrentProfile();
 
             displayWelcomeMessage(profile);
+            signInMatchFBProfileDB(profile);
         }
 
         @Override
@@ -50,6 +55,13 @@ public class MainActivityFragment extends Fragment {
 
         }
     };
+
+    private void signInMatchFBProfileDB(Profile profile){
+        //currUser.setID(Integer.parseInt(profile.getId()));
+        //Check if we have this person in our db.
+        //If yes load profile and continue
+        //Otherwise create new user entry and continue
+    }
 
     private void displayWelcomeMessage(Profile profile) {
         if (profile != null) {
@@ -91,7 +103,7 @@ public class MainActivityFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LoginButton loginButton = (LoginButton) view.findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends");
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "read_insights"));
         loginButton.setFragment(this);
         loginButton.registerCallback(myCallbackManager, myCallback);
 

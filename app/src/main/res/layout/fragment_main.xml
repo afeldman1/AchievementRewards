@@ -11,16 +11,19 @@
 
     <TextView
         android:id="@+id/ha"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please Sign in"/>
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:text="Welcome to Achievement Rewards\nPlease Sign in"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="50dp" />
 
 </RelativeLayout>
