@@ -1,8 +1,8 @@
 package com.example.adamfeldman.achievmentrewards;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +35,12 @@ public class MainActivityFragment extends Fragment {
 
     private CurrentUser currUser;
 
+    public void dbConnect(String host, String port, String db_userid, String db_password) {
+        DbInfo dbInfo = new DbInfo(host, port, db_userid, db_password);
+        //Commented out to be moved to new activity
+        //new ConnectDatabaseTask(this).execute(dbInfo);
+    }
+
     private FacebookCallback<LoginResult> myCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
@@ -43,6 +49,8 @@ public class MainActivityFragment extends Fragment {
 
             displayWelcomeMessage(profile);
             signInMatchFBProfileDB(profile);
+
+            dbConnect("dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com", "1433", "awsUser", "awsPassword");
         }
 
         @Override
