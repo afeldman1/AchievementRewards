@@ -1,4 +1,4 @@
-package com.example.adamfeldman.achievmentrewards;
+package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.app.Activity;
 import android.os.AsyncTask;

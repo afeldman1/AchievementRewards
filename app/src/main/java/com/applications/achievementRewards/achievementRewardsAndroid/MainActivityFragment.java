@@ -1,4 +1,4 @@
-package com.example.adamfeldman.achievmentrewards;
+package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
 import android.os.Bundle;
