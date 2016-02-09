@@ -55,5 +55,7 @@ public class ConnectDatabaseTask extends AsyncTask<DbInfo, Integer, List<String>
         //super.onPostExecute(strings);
         TextView myTextView = (TextView) myActivity.findViewById(R.id.ha);
         myTextView.setText("Test: " + result.toString());
+
+
     }
 }

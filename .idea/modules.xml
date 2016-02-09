@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AchievmentRewards.iml" filepath="$PROJECT_DIR$/AchievmentRewards.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AchievementRewards.iml" filepath="$PROJECT_DIR$/AchievementRewards.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
