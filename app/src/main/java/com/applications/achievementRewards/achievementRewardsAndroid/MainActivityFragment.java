@@ -74,6 +74,8 @@ public class MainActivityFragment extends Fragment {
     private void displayWelcomeMessage(Profile profile) {
         if (profile != null) {
             myTextView.setText("hi " + profile.getName());
+            Intent intent = new Intent(getActivity(), HomeScreenActivity.class);
+            startActivity(intent);
         }
     }
 

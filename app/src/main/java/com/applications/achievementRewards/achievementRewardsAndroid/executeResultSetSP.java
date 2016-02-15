@@ -35,15 +35,15 @@ public class ExecuteResultSetSP extends AsyncTask<Object, Integer, ResultSet> {
 
     protected ResultSet doInBackground(Object... params) {
 
-        String ConnectionString = "jdbc:jtds:sqlserver://" + ((DbInfo)params[0]).getHost() + ":" + ((DbInfo)params[0]).getPort() + "/" + ((DbInfo)params[0]).getDatabase();
+        //String ConnectionString = "jdbc:jtds:sqlserver://" + ((DbInfo)params[0]).getHost() + ":" + ((DbInfo)params[0]).getPort() + "/" + ((DbInfo)params[0]).getDatabase();
         ResultSet rs = null;
         PreparedStatement cs=null;
 
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(ConnectionString, ((DbInfo)params[0]).getDb_userid(), ((DbInfo)params[0]).getDb_password());
+            //Connection conn = DriverManager.getConnection(ConnectionString, ((DbInfo)params[0]).getDb_userid(), ((DbInfo)params[0]).getDb_password());
 
-            cs = conn.prepareStatement("EXECUTE " + ((DbInfo)params[0]).getCurrQuery());
+            //cs = conn.prepareStatement("EXECUTE " + ((DbInfo)params[0]).getCurrQuery());
             cs.setEscapeProcessing(true);
             cs.setQueryTimeout(90);
 
