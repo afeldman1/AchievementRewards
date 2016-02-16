@@ -2,4 +2,6 @@
     <string name="app_name">AchievmentRewards</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">1659980030952665</string>
+    <string name="settings_switch_1">Location Permission: </string>
+    <string name="settings_switch_1_details">This will allow the app to track your location for use with determining rewards in your area.</string>
 </resources>
