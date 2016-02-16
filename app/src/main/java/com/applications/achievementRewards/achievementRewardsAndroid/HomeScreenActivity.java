@@ -78,9 +78,9 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     // This method will be called when a CurrentUser is posted
     @Subscribe
-    public void onEvent(CurrentUser curruntUser){
+    public void onEvent(CurrentUser currentUser){
         //doSomethingWith(event);
-        currUser = curruntUser;
+        currUser = currentUser;
     }
 
     @Override

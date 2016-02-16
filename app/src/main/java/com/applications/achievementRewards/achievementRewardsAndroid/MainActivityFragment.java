@@ -125,6 +125,7 @@ public class MainActivityFragment extends Fragment {
 
                     currUser.setFirstName(currentProfile.getFirstName());
                     currUser.setLastName(currentProfile.getLastName());
+                    //TODO: set currUser email, birthday, and gender
 
                     new Users_DatabaseTask(getActivity(), myTextView).execute(currUser);
 

@@ -50,6 +50,12 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, List<Cur
                 //list = currentUserDao.queryForAll();
 
                 list = currentUserDao.queryBuilder().where().eq(CurrentUser.CURR_ID, params[0].getID()).query();
+
+                if (list.size() == 0)
+                {
+                    currentUserDao.create(params[0]);
+                }
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -82,6 +88,7 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, List<Cur
 
             tv.setText(sb.toString());
 */
+
             EventBus.getDefault().post(currentUsers.get(0));
         }
 }
