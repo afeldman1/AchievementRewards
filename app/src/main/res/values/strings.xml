@@ -4,4 +4,6 @@
     <string name="facebook_app_id">1659980030952665</string>
     <string name="settings_switch_1">Location Permission: </string>
     <string name="settings_switch_1_details">This will allow the app to track your location for use with determining rewards in your area.</string>
+    <string name="settings_switch_0">Phone Location Setting: </string>
+    <string name="settings_switch_0_details">The devices location settings need to be activiated in order for tracking to work.</string>
 </resources>
