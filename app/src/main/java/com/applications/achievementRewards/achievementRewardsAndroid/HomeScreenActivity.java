@@ -2,10 +2,7 @@ package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,9 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUser;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 
 public class HomeScreenActivity extends AppCompatActivity {
+    private CurrentUser currUser;
+
     public ArrayList<CompositeRewardActivity> all_companies = new ArrayList<CompositeRewardActivity>();
 
     @Override
@@ -72,6 +76,25 @@ public class HomeScreenActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+    }
+
+    // This method will be called when a CurrentUser is posted
+    @Subscribe
+    public void onEvent(CurrentUser curruntUser){
+        //doSomethingWith(event);
+        currUser = curruntUser;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     @Override
