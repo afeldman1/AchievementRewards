@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.Users_DatabaseTask;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUser;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;

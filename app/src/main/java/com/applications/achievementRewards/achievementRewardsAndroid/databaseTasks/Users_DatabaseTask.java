@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUser;
+import com.applications.achievementRewards.achievementRewardsAndroid.CurrentUser;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.db.SqlServerJtdsDatabaseType;

@@ -1,18 +1,47 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
+@DatabaseTable(tableName = "tbl_Users")
+
 public class CurrentUser {
-    private int currID;
+    public static final String CURR_ID = "FBid";
+
+    @DatabaseField(columnName = "FBid", canBeNull = false)
+    private Long currID;
+    @DatabaseField(columnName = "FirstName")
     private String currFirstName;
+    @DatabaseField(columnName = "LastName")
     private String currLastName;
+    @DatabaseField(columnName = "Email")
+    private String currEmail;
+    @DatabaseField(columnName = "Gender")
     private String currGender;
+    @DatabaseField(columnName = "Birthday")
     private Date currBirthday;
 
-    public void setID(int id){
+    public CurrentUser() {
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentUser{" +
+                "currID=" + currID +
+                ", currFirstName='" + currFirstName + '\'' +
+                ", currLastName='" + currLastName + '\'' +
+                ", currEmail='" + currEmail + '\'' +
+                ", currGender='" + currGender + '\'' +
+                ", currBirthday=" + currBirthday +
+                '}';
+    }
+
+    public void setID(Long id){
         currID = id;
     }
-    public int getID(){
+    public Long getID(){
         return currID;
     }
 
@@ -30,6 +59,13 @@ public class CurrentUser {
     }
     public String getName(){
         return currFirstName + ' ' + currLastName;
+    }
+
+    public void setEmail(String email){
+        currEmail = email;
+    }
+    public String getEmail(){
+        return currEmail;
     }
 
     public void setGender(String gender){
