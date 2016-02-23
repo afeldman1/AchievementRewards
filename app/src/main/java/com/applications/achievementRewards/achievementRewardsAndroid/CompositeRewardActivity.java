@@ -36,16 +36,16 @@ public class CompositeRewardActivity extends LinearLayout {
     //set the company name at the top
     public void setCompanyName(String text)
     {
-        TextView tx = (TextView) findViewById(R.id.company_text);
+        TextView tx = (TextView) findViewById(R.id.merchant_name);
         tx.setText(text);
     }
 
     public void setDesc(String text)
     {
-        TextView tx = (TextView) findViewById(R.id.company_desc);
+        TextView tx = (TextView) findViewById(R.id.merchant_desc);
         tx.setText(text);
     }
 
-    //Need a set image function as well
+    //Need a set ivMerchantLogo function as well
 
 }

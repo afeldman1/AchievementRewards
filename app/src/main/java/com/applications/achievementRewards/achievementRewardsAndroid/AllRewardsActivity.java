@@ -1,6 +1,9 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,21 +12,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementsModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomeScreenActivity extends AppCompatActivity {
+import toDelete.UserAchievementsCustomAdapter;
+
+public class AllRewardsActivity extends AppCompatActivity {
     private CurrentUser currUser;
+
+    //ListView list;
+    //UserAchievementsCustomAdapter adapter;
+    //public AllRewardsActivity CustomListView = null;
+    public  List<UserAchievementsModel> userAchievementData;
 
     public ArrayList<CompositeRewardActivity> all_companies = new ArrayList<CompositeRewardActivity>();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_all_rewards_screen);
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -39,7 +54,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 ml.removeAllViews();
                 all_companies.clear();
                 for (int i = 0; i < tmp2; i++) {
-                    CompositeRewardActivity cmp = new CompositeRewardActivity(HomeScreenActivity.this);
+                    CompositeRewardActivity cmp = new CompositeRewardActivity(AllRewardsActivity.this);
                     cmp.setLayoutParams(new CompositeRewardActivity.LayoutParams(CompositeRewardActivity.LayoutParams.WRAP_CONTENT, CompositeRewardActivity.LayoutParams.WRAP_CONTENT));
                     cmp.setClickable(true);
                     cmp.setCompanyName("Company" + i);
@@ -81,6 +96,31 @@ public class HomeScreenActivity extends AppCompatActivity {
     public void onEvent(CurrentUser currentUser){
         //doSomethingWith(event);
         currUser = currentUser;
+
+        //SharedPreferences.Editor editor = this.getPreferences(Context.MODE_PRIVATE));
+        //editor.get("fbID");
+
+        UserAchievementsModel userAchievementsModel;
+        new UserAchievements_DatabaseTask().execute(currUser.getID());
+    }
+
+    @Subscribe
+    public void onEvent(List<UserAchievementsModel> userAchievementData){
+
+
+        //setContentView(R.layout.user_achievements_view);
+
+        this.userAchievementData = userAchievementData;
+
+        //CustomListView = this;
+
+        //Resources res = getResources();
+        //ListView lv= ( ListView )findViewById( R.id.listView );  // List defined in XML ( See Below )
+
+        /**************** Create Custom Adapter *********/
+        //adapter = new UserAchievementsCustomAdapter(this, (ArrayList)userAchievementData,res );
+        //list.setAdapter(adapter );
+
     }
 
     @Override
@@ -94,6 +134,19 @@ public class HomeScreenActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
         super.onStop();
     }
+
+    /*****************  This function used by adapter ****************/
+    /*public void onItemClick(int mPosition)
+    {
+        // SHOW ALERT
+
+        //System.out.println("HI");
+        UserAchievementsModel tempValues = userAchievementData.get(mPosition);
+
+        Intent intent = new Intent(getApplicationContext(), RewardDetailsActivity.class);
+        startActivityForResult(intent, 100);
+
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

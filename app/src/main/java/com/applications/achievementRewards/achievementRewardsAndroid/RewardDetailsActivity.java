@@ -23,7 +23,7 @@ public class RewardDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                TextView tv = (TextView)findViewById(R.id.company_desc);
+                TextView tv = (TextView)findViewById(R.id.merchant_desc);
                 tv.setText("HI");
             }
 

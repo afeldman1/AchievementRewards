@@ -27,7 +27,7 @@ import java.util.Arrays;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class SignInActivityFBFragment extends Fragment {
 
     private TextView myTextView;
 
@@ -83,7 +83,7 @@ public class MainActivityFragment extends Fragment {
     private void displayWelcomeMessage(Profile profile) {
         if (profile != null) {
             myTextView.setText("hi " + profile.getName());
-            Intent intent = new Intent(getActivity(), HomeScreenActivity.class);
+            Intent intent = new Intent(getActivity(), AllRewardsActivity.class);
             startActivity(intent);
         }
     }
@@ -100,7 +100,7 @@ public class MainActivityFragment extends Fragment {
         myTextView.setText("hi " + currUser.getName() +" "+ currUser.getGender() +" "+ currUser.getBirthday().toString());
     }
 
-    public MainActivityFragment() {
+    public SignInActivityFBFragment() {
     }
 
     @Override
@@ -129,7 +129,7 @@ public class MainActivityFragment extends Fragment {
 
                     new Users_DatabaseTask(getActivity(), myTextView).execute(currUser);
 
-                    Intent intent = new Intent(getActivity(), HomeScreenActivity.class);
+                    Intent intent = new Intent(getActivity(), AllRewardsActivity.class);
                     //intent.putExtra("currentUsers", currentUsers.get(0));
                     getActivity().startActivity(intent);
 
@@ -161,7 +161,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_sign_in, container, false);
     }
 
     @Override

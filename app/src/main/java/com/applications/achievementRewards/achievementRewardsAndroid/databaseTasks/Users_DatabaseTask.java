@@ -1,5 +1,8 @@
 package com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
@@ -16,7 +19,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, List<CurrentUser>> {
+public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentUser> {
         //private final String LOG_TAG = getClass().getSimpleName();
         private ConnectionSource connectionSource;
         private Dao<CurrentUser, Integer> currentUserDao;
@@ -43,7 +46,7 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, List<Cur
         }
 
         @Override
-        protected List<CurrentUser> doInBackground(CurrentUser... params) {
+        protected CurrentUser doInBackground(CurrentUser... params) {
             List<CurrentUser> list = null;
             try {
                 // query for all of the data objects in the database
@@ -54,17 +57,19 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, List<Cur
                 if (list.size() == 0)
                 {
                     currentUserDao.create(params[0]);
+                    list.add(params[0]);
                 }
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-            return list;
+            return list.get(0);
+
         }
 
         @Override
-        protected void onPostExecute(List<CurrentUser> currentUsers) {
+        protected void onPostExecute(CurrentUser currentUsers) {
             //super.onPostExecute(currentUsers);
 /*
             // our string builder for building the content-view
@@ -88,7 +93,28 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, List<Cur
 
             tv.setText(sb.toString());
 */
+            SharedPreferences.Editor editor = myFragmentActivity.getPreferences(Context.MODE_PRIVATE).edit();
 
-            EventBus.getDefault().post(currentUsers.get(0));
+            editor.remove("fbID");
+            editor.putLong("fbID", currentUsers.getID());
+
+            editor.remove("FirstName");
+            editor.putString("FirstName", currentUsers.getCurrFirstName());
+
+            editor.remove("LastName");
+            editor.putString("LastName", currentUsers.getCurrLastName());
+
+            editor.remove("Gender");
+            editor.putString("Gender", currentUsers.getGender());
+
+            //editor.remove("Birthday");
+            //editor.putString("Birthday", currentUsers.getBirthday());
+
+            editor.remove("Email");
+            editor.putString("Email", currentUsers.getEmail());
+
+            editor.commit();
+
+            EventBus.getDefault().post(currentUsers);
         }
 }
