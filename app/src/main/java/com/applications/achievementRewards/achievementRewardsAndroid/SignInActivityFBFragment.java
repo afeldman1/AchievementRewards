@@ -21,7 +21,6 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import java.sql.ResultSet;
 import java.util.Arrays;
 
 /**
@@ -37,16 +36,6 @@ public class SignInActivityFBFragment extends Fragment {
     private ProfileTracker myProfileTracker;
 
     private CurrentUser currUser = new CurrentUser();
-
-    public void dbConnect(String proc, String... params) {
-        //DbInfo dbInfo = new DbInfo(proc);
-        //Commented out to be moved to new activity
-        //new ConnectDatabaseTask(this).execute(dbInfo);
-    }
-
-    public void dbConnecttemp() {
-        //new ExecuteResultSetSP(this, this.getClass().getName(), "displayRealWelcomeMessage").execute(new DbInfo("getUser " + Long.toString(currUser.getID())));
-    }
 
     private FacebookCallback<LoginResult> myCallback = new FacebookCallback<LoginResult>() {
         @Override
@@ -72,6 +61,7 @@ public class SignInActivityFBFragment extends Fragment {
         }
     };
 
+    /*
     private void signInMatchFBProfileDB(Profile profile){
         currUser.setID(Long.parseLong(profile.getId()));
         //Check if we have this person in our db.
@@ -87,18 +77,7 @@ public class SignInActivityFBFragment extends Fragment {
             startActivity(intent);
         }
     }
-
-    public void displayRealWelcomeMessage(ResultSet a) {
-
-        //rs).findColumn("FirstName")
-        currUser.setFirstName("jk");
-        //currUser.setFirstName(rs.getString("FirstName"));
-        //currUser.setLastName(rs.getString("LastName"));
-        //currUser.setGender(rs.getString("Gender"));
-        //currUser.setBirthday(rs.getDate("Birthday"));
-
-        myTextView.setText("hi " + currUser.getName() +" "+ currUser.getGender() +" "+ currUser.getBirthday().toString());
-    }
+    */
 
     public SignInActivityFBFragment() {
     }
@@ -117,21 +96,15 @@ public class SignInActivityFBFragment extends Fragment {
         myProfileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                displayWelcomeMessage(currentProfile);
 
                 if (currentProfile != null)
                 {
                     currUser.setID(Long.parseLong(currentProfile.getId()));
-
                     currUser.setFirstName(currentProfile.getFirstName());
                     currUser.setLastName(currentProfile.getLastName());
                     //TODO: set currUser email, birthday, and gender
 
                     new Users_DatabaseTask(getActivity(), myTextView).execute(currUser);
-
-                    Intent intent = new Intent(getActivity(), AllRewardsActivity.class);
-                    //intent.putExtra("currentUsers", currentUsers.get(0));
-                    getActivity().startActivity(intent);
 
                     //DatabaseHelper dbh = new DatabaseHelper();
                     //dbh.doSampleDatabaseStuff("Hi", myTextView);
@@ -178,8 +151,8 @@ public class SignInActivityFBFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Profile profile = Profile.getCurrentProfile();
-        displayWelcomeMessage(profile);
+        //Profile profile = Profile.getCurrentProfile();
+        //displayWelcomeMessage(profile);
     }
 
     @Override
