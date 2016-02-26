@@ -1,20 +1,19 @@
 package com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks;
 
-import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.AllRewardsActivity;
 import com.applications.achievementRewards.achievementRewardsAndroid.CurrentUser;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.db.SqlServerJtdsDatabaseType;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -93,10 +92,11 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentU
 
             tv.setText(sb.toString());
 */
-            SharedPreferences.Editor editor = myFragmentActivity.getPreferences(Context.MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(myFragmentActivity).edit();
+            //editor = myFragmentActivity.getPreferences(Context.MODE_PRIVATE).edit();
 
-            editor.remove("fbID");
-            editor.putLong("fbID", currentUsers.getID());
+            editor.remove("currUserID");
+            editor.putLong("currUserID", currentUsers.getID());
 
             editor.remove("FirstName");
             editor.putString("FirstName", currentUsers.getCurrFirstName());
@@ -107,14 +107,18 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentU
             editor.remove("Gender");
             editor.putString("Gender", currentUsers.getGender());
 
-            //editor.remove("Birthday");
-            //editor.putString("Birthday", currentUsers.getBirthday());
+            editor.remove("Birthday");
+            editor.putLong("Birthday", currentUsers.getBirthday() != null ? currentUsers.getBirthday().getTime() : 0);
 
             editor.remove("Email");
             editor.putString("Email", currentUsers.getEmail());
 
             editor.commit();
 
-            EventBus.getDefault().post(currentUsers);
+            Intent intent = new Intent(myFragmentActivity, AllRewardsActivity.class);
+            //intent.putExtra("currentUsers", currentUsers.get(0));
+            myFragmentActivity.startActivity(intent);
+
+            //EventBus.getDefault().post(currentUsers);
         }
 }

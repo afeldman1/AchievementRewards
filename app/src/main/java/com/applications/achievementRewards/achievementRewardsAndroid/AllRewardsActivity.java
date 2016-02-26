@@ -1,10 +1,9 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementsModel;
@@ -22,8 +20,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import toDelete.UserAchievementsCustomAdapter;
 
 public class AllRewardsActivity extends AppCompatActivity {
     private CurrentUser currUser;
@@ -39,6 +35,9 @@ public class AllRewardsActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_rewards_screen);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        new UserAchievements_DatabaseTask().execute(sharedPreferences.getLong("currUserID", 0));
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -93,21 +92,9 @@ public class AllRewardsActivity extends AppCompatActivity {
 
     // This method will be called when a CurrentUser is posted
     @Subscribe
-    public void onEvent(CurrentUser currentUser){
-        //doSomethingWith(event);
-        currUser = currentUser;
-
-        //SharedPreferences.Editor editor = this.getPreferences(Context.MODE_PRIVATE));
-        //editor.get("fbID");
-
-        UserAchievementsModel userAchievementsModel;
-        new UserAchievements_DatabaseTask().execute(currUser.getID());
-    }
-
-    @Subscribe
     public void onEvent(List<UserAchievementsModel> userAchievementData){
 
-
+        UserAchievementsModel userAchievementsModel;
         //setContentView(R.layout.user_achievements_view);
 
         this.userAchievementData = userAchievementData;
