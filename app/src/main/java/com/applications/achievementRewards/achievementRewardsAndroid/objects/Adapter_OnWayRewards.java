@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.R;
 
-/**
- * Created by owner1 on 2/26/16.
- */
 public class Adapter_OnWayRewards extends BaseAdapter{
     Context context;
     String[] data;

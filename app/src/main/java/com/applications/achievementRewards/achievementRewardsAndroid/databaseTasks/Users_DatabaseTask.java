@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.AllRewardsActivity;
 import com.applications.achievementRewards.achievementRewardsAndroid.CurrentUser;
+import com.applications.achievementRewards.achievementRewardsAndroid.HomeActivity;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.db.SqlServerJtdsDatabaseType;
@@ -115,7 +116,7 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentU
 
             editor.commit();
 
-            Intent intent = new Intent(myFragmentActivity, AllRewardsActivity.class);
+            Intent intent = new Intent(myFragmentActivity, HomeActivity.class);
             //intent.putExtra("currentUsers", currentUsers.get(0));
             myFragmentActivity.startActivity(intent);
 
