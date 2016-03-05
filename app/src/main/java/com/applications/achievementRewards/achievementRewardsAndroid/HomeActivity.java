@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.OnYourWayRewards_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievedAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.Adapter_OnWayRewards;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.OnYourWayRewardsModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -31,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         new UserAchievedAchievements_DatabaseTask().execute(sharedPreferences.getLong("currUserID", 0));
-
+        new OnYourWayRewards_DatabaseTask().execute(sharedPreferences.getLong("currUserID", 0));
     }
 
     @Subscribe
@@ -41,10 +43,12 @@ public class HomeActivity extends AppCompatActivity {
         ListView myList=(ListView)
                 findViewById(R.id.avail_list);
         myList.setAdapter(myAdapter);
+    }
 
-
+    @Subscribe
+    public void onOnYourWayRewardsModelEvent(List<OnYourWayRewardsModel> onYourWayRewardsModel) {
         ListView myList2 = (ListView) findViewById(R.id.on_way_list);
-        myList2.setAdapter(new Adapter_OnWayRewards(this,on_way_rewards));
+        myList2.setAdapter(new Adapter_OnWayRewards(this, on_way_rewards));
     }
 
     @Override

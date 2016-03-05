@@ -30,7 +30,7 @@ public class UserAchievedAchievements_DatabaseTask extends AsyncTask<Long, Integ
                 ResultSet rs = statement.executeQuery(queryString);
 
                 while (rs.next()) {
-                    userAchievedAchievementsModels.add(rs.getString(1) + ": " + rs.getString(2));
+                    userAchievedAchievementsModels.add(rs.getString("Merchant") + ": " + rs.getString("Achievement"));
                 }
             } catch (Exception e) {
                 //Db_list.add("Error");
@@ -38,7 +38,6 @@ public class UserAchievedAchievements_DatabaseTask extends AsyncTask<Long, Integ
             }
 
             return userAchievedAchievementsModels;
-
         }
 
         @Override
