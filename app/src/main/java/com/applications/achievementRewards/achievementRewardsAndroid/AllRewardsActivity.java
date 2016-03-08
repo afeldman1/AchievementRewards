@@ -1,11 +1,10 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +12,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementsModel;
 
-public class HomeScreenActivity extends AppCompatActivity {
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AllRewardsActivity extends AppCompatActivity {
+    private CurrentUser currUser;
+
+    //ListView list;
+    //UserAchievementsCustomAdapter adapter;
+    //public AllRewardsActivity CustomListView = null;
+    public  List<UserAchievementsModel> userAchievementData;
+
     public ArrayList<CompositeRewardActivity> all_companies = new ArrayList<CompositeRewardActivity>();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_all_rewards_screen);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        new UserAchievements_DatabaseTask().execute(sharedPreferences.getLong("currUserID", 0));
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -37,7 +53,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 ml.removeAllViews();
                 all_companies.clear();
                 for (int i = 0; i < tmp2; i++) {
-                    CompositeRewardActivity cmp = new CompositeRewardActivity(HomeScreenActivity.this);
+                    CompositeRewardActivity cmp = new CompositeRewardActivity(AllRewardsActivity.this);
                     cmp.setLayoutParams(new CompositeRewardActivity.LayoutParams(CompositeRewardActivity.LayoutParams.WRAP_CONTENT, CompositeRewardActivity.LayoutParams.WRAP_CONTENT));
                     cmp.setClickable(true);
                     cmp.setCompanyName("Company" + i);
@@ -73,6 +89,51 @@ public class HomeScreenActivity extends AppCompatActivity {
             }
         });*/
     }
+
+    // This method will be called when a CurrentUser is posted
+    @Subscribe
+    public void onEvent(List<UserAchievementsModel> userAchievementData){
+
+        UserAchievementsModel userAchievementsModel;
+        //setContentView(R.layout.user_achievements_view);
+
+        this.userAchievementData = userAchievementData;
+
+        //CustomListView = this;
+
+        //Resources res = getResources();
+        //ListView lv= ( ListView )findViewById( R.id.listView );  // List defined in XML ( See Below )
+
+        /**************** Create Custom Adapter *********/
+        //adapter = new UserAchievementsCustomAdapter(this, (ArrayList)userAchievementData,res );
+        //list.setAdapter(adapter );
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    /*****************  This function used by adapter ****************/
+    /*public void onItemClick(int mPosition)
+    {
+        // SHOW ALERT
+
+        //System.out.println("HI");
+        UserAchievementsModel tempValues = userAchievementData.get(mPosition);
+
+        Intent intent = new Intent(getApplicationContext(), RewardDetailsActivity.class);
+        startActivityForResult(intent, 100);
+
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

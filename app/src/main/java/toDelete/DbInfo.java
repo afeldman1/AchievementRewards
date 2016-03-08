@@ -1,16 +1,20 @@
-package com.applications.achievementRewards.achievementRewardsAndroid;
+package toDelete;
 
 public class DbInfo {
     private String currHost;
     private String currPort;
+    private String currDatabase;
     private String currDb_userid;
     private String currDb_password;
+    private String currQuery;
 
-    public DbInfo(String host, String port, String db_userid, String db_password){
-        setHost(host);
-        setPort(port);
-        setDb_userid(db_userid);
-        setDb_password(db_password);
+    public DbInfo(String query){
+        setHost("dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com");
+        setPort("1433");
+        setDatabase("achievmentRewardsDB");
+        setDb_userid("awsUser");
+        setDb_password("awsPassword");
+        setCurrQuery(query);
     }
     public void setHost(String host){
         currHost = host;
@@ -26,6 +30,13 @@ public class DbInfo {
         return currPort;
     }
 
+    public void setDatabase(String database){
+        currDatabase = database;
+    }
+    public String getDatabase(){
+        return currDatabase;
+    }
+
     public void setDb_userid(String db_userid){
         currDb_userid = db_userid;
     }
@@ -38,5 +49,12 @@ public class DbInfo {
     }
     public String getDb_password(){
         return currDb_password;
+    }
+
+    public void setCurrQuery(String query){
+        currQuery = query;
+    }
+    public String getCurrQuery(){
+        return currQuery;
     }
 }

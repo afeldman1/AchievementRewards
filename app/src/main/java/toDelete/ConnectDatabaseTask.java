@@ -1,8 +1,10 @@
-package com.applications.achievementRewards.achievementRewardsAndroid;
+package toDelete;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.TextView;
+
+import com.applications.achievementRewards.achievementRewardsAndroid.R;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.Users_DatabaseTask;
+
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -24,7 +26,7 @@ import java.util.Arrays;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class SignInActivityFBFragment extends Fragment {
 
     private TextView myTextView;
 
@@ -33,13 +35,7 @@ public class MainActivityFragment extends Fragment {
     private AccessTokenTracker myTokenTracker;
     private ProfileTracker myProfileTracker;
 
-    private CurrentUser currUser;
-
-    public void dbConnect(String host, String port, String db_userid, String db_password) {
-        DbInfo dbInfo = new DbInfo(host, port, db_userid, db_password);
-        //Commented out to be moved to new activity
-        //new ConnectDatabaseTask(this).execute(dbInfo);
-    }
+    private CurrentUser currUser = new CurrentUser();
 
     private FacebookCallback<LoginResult> myCallback = new FacebookCallback<LoginResult>() {
         @Override
@@ -47,10 +43,11 @@ public class MainActivityFragment extends Fragment {
             AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
 
-            displayWelcomeMessage(profile);
-            signInMatchFBProfileDB(profile);
+            //displayWelcomeMessage(profile);
+            //signInMatchFBProfileDB(profile);
 
-            dbConnect("dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com", "1433", "awsUser", "awsPassword");
+            //currUser.setID(Integer.parseInt(profile.getId()));
+            //new ExecuteResultSetSP(this.getClass().getName(), "displayRealWelcomeMessage").execute(new DbInfo("getUser" + Integer.toString(currUser.getID())));
         }
 
         @Override
@@ -64,22 +61,25 @@ public class MainActivityFragment extends Fragment {
         }
     };
 
+    /*
     private void signInMatchFBProfileDB(Profile profile){
-        //currUser.setID(Integer.parseInt(profile.getId()));
+        currUser.setID(Long.parseLong(profile.getId()));
         //Check if we have this person in our db.
         //If yes load profile and continue
         //Otherwise create new user entry and continue
+        dbConnect("getUser", Long.toString(currUser.getID()));
     }
 
     private void displayWelcomeMessage(Profile profile) {
         if (profile != null) {
             myTextView.setText("hi " + profile.getName());
-            Intent intent = new Intent(getActivity(), HomeScreenActivity.class);
+            Intent intent = new Intent(getActivity(), AllRewardsActivity.class);
             startActivity(intent);
         }
     }
+    */
 
-    public MainActivityFragment() {
+    public SignInActivityFBFragment() {
     }
 
     @Override
@@ -96,7 +96,35 @@ public class MainActivityFragment extends Fragment {
         myProfileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                displayWelcomeMessage(currentProfile);
+
+                if (currentProfile != null)
+                {
+                    currUser.setID(Long.parseLong(currentProfile.getId()));
+                    currUser.setFirstName(currentProfile.getFirstName());
+                    currUser.setLastName(currentProfile.getLastName());
+                    //TODO: set currUser email, birthday, and gender
+
+                    new Users_DatabaseTask(getActivity(), myTextView).execute(currUser);
+
+                    //DatabaseHelper dbh = new DatabaseHelper();
+                    //dbh.doSampleDatabaseStuff("Hi", myTextView);
+
+                    /*
+                    SessionFactory sessionFactory =  new Configuration().configure().buildSessionFactory();
+                    Session session = sessionFactory.openSession();
+                    try
+                    {
+                        session.beginTransaction();
+                        session.save(currUser);
+                        session.getTransaction().commit();
+                    }
+                    catch(Exception e)
+                    {
+                        session.getTransaction().rollback();
+                    }*/
+
+                    //dbConnecttemp();
+                }
             }
         };
         myTokenTracker.startTracking();
@@ -106,7 +134,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_sign_in, container, false);
     }
 
     @Override
@@ -123,8 +151,8 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Profile profile = Profile.getCurrentProfile();
-        displayWelcomeMessage(profile);
+        //Profile profile = Profile.getCurrentProfile();
+        //displayWelcomeMessage(profile);
     }
 
     @Override
@@ -140,5 +168,4 @@ public class MainActivityFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         myCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
 }
