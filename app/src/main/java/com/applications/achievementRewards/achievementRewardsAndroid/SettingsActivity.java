@@ -96,11 +96,11 @@ public class SettingsActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                        switch_coarse.setChecked(gps_final);
+                        switch_coarse.setChecked(network_final);
                     }
                 });
                 dialog.show();
-                switch_coarse.setChecked(gps_final);
+                switch_coarse.setChecked(network_final);
             }
         });
 
