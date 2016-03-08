@@ -2,8 +2,14 @@
     <string name="app_name">Achieve\'N\'Receive</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">1659980030952665</string>
-    <string name="settings_switch_1">Location Permission: </string>
-    <string name="settings_switch_1_details">This will allow the app to track your location for use with determining rewards in your area.</string>
-    <string name="settings_switch_0">Phone Location Setting: </string>
-    <string name="settings_switch_0_details">The devices location settings need to be activiated in order for tracking to work.</string>
+    <string name="settings_switch_1">Approximate Position: </string>
+    <string name="settings_switch_1_details">This will allow the app to track your location with limited accuracy, not all rewards will be available.</string>
+    <string name="settings_switch_0">Detailed Position: </string>
+    <string name="settings_switch_0_details">This will allow the app to accurately track you location, all rewards will be available.</string>
+    <string name="gps_not_enabled">GPS location settings are currently disabled on this device. To enable them for full functionality, you must go to the system settings.</string>
+    <string name="gps_enabled">GPS location settings are currently enabled on this device. For full functionality, it is recommended to leave this setting on. However, Battery will be saved without it.</string>
+    <string name="network_not_enabled">Network location settings are currently disabled on this device. To enable them for increased functionality, you must go to the system settings.</string>
+    <string name="network_enabled">Network location settings are currently disabled on this device. Enabling them can save battery when tracking location.</string>
+    <string name="open_location_settings">Location Settings</string>
+    <string name="Cancel">Cancel</string>
 </resources>
