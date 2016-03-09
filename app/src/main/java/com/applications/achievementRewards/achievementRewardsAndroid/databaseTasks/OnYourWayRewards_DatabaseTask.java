@@ -2,20 +2,20 @@ package com.applications.achievementRewards.achievementRewardsAndroid.databaseTa
 
 import android.os.AsyncTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.OnYourWayRewardsModel;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.OnYourWayRewardsModels;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, List<OnYourWayRewardsModel>> {
+public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYourWayRewardsModels> {
 
     @Override
-    protected List<OnYourWayRewardsModel> doInBackground(Long... params) {
-        List<OnYourWayRewardsModel> onYourWayRewardsModel = new ArrayList<>();
+    protected OnYourWayRewardsModels doInBackground(Long... params) {
+        OnYourWayRewardsModels onYourWayRewardsModels = new OnYourWayRewardsModels();
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
 
@@ -27,18 +27,18 @@ public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, List
             ResultSet rs = statement.executeQuery(queryString);
 
             while (rs.next()) {
-                onYourWayRewardsModel.add(new OnYourWayRewardsModel(rs.getString("Merchant"), rs.getString("Achievement"), rs.getDouble("Progress"), rs.getInt("TrackingMax")));
+                onYourWayRewardsModels.add(new OnYourWayRewardsModel(rs.getString("Merchant"), rs.getString("Achievement"), rs.getDouble("Progress"), rs.getInt("TrackingMax")));
             }
         } catch (Exception e) {
             //Db_list.add("Error");
             e.printStackTrace();
         }
 
-        return onYourWayRewardsModel;
+        return onYourWayRewardsModels;
     }
 
     @Override
-    protected void onPostExecute(List<OnYourWayRewardsModel> userAchievementModels) {
+    protected void onPostExecute(OnYourWayRewardsModels userAchievementModels) {
         //super.onPostExecute(currentUsers);
 
         EventBus.getDefault().post(userAchievementModels);

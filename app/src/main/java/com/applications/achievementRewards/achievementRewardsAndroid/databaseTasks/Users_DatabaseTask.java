@@ -5,9 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
-import android.widget.TextView;
 
-import com.applications.achievementRewards.achievementRewardsAndroid.AllRewardsActivity;
 import com.applications.achievementRewards.achievementRewardsAndroid.CurrentUser;
 import com.applications.achievementRewards.achievementRewardsAndroid.HomeActivity;
 import com.j256.ormlite.dao.Dao;
@@ -20,14 +18,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentUser> {
-        //private final String LOG_TAG = getClass().getSimpleName();
         private ConnectionSource connectionSource;
         private Dao<CurrentUser, Integer> currentUserDao;
         private FragmentActivity myFragmentActivity;
-        private TextView tv;
 
-        public Users_DatabaseTask(FragmentActivity fragmentActivity, TextView intv) {
-            tv = intv;
+        public Users_DatabaseTask(FragmentActivity fragmentActivity) {
             myFragmentActivity = fragmentActivity;
 
             if (connectionSource == null) {
@@ -49,7 +44,6 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentU
         protected CurrentUser doInBackground(CurrentUser... params) {
             List<CurrentUser> list = null;
             try {
-                // query for all of the data objects in the database
                 //list = currentUserDao.queryForAll();
 
                 list = currentUserDao.queryBuilder().where().eq(CurrentUser.CURR_ID, params[0].getID()).query();
@@ -94,7 +88,6 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentU
             tv.setText(sb.toString());
 */
             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(myFragmentActivity).edit();
-            //editor = myFragmentActivity.getPreferences(Context.MODE_PRIVATE).edit();
 
             editor.remove("currUserID");
             editor.putLong("currUserID", currentUsers.getID());
@@ -117,9 +110,6 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUser, Integer, CurrentU
             editor.commit();
 
             Intent intent = new Intent(myFragmentActivity, HomeActivity.class);
-            //intent.putExtra("currentUsers", currentUsers.get(0));
             myFragmentActivity.startActivity(intent);
-
-            //EventBus.getDefault().post(currentUsers);
         }
 }

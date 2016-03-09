@@ -27,9 +27,6 @@ import java.util.Arrays;
  * A placeholder fragment containing a simple view.
  */
 public class SignInActivityFBFragment extends Fragment {
-
-    private TextView myTextView;
-
     private CallbackManager myCallbackManager;
 
     private AccessTokenTracker myTokenTracker;
@@ -43,11 +40,7 @@ public class SignInActivityFBFragment extends Fragment {
             AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
 
-            //displayWelcomeMessage(profile);
             //signInMatchFBProfileDB(profile);
-
-            //currUser.setID(Integer.parseInt(profile.getId()));
-            //new ExecuteResultSetSP(this.getClass().getName(), "displayRealWelcomeMessage").execute(new DbInfo("getUser" + Integer.toString(currUser.getID())));
         }
 
         @Override
@@ -60,27 +53,6 @@ public class SignInActivityFBFragment extends Fragment {
 
         }
     };
-
-    /*
-    private void signInMatchFBProfileDB(Profile profile){
-        currUser.setID(Long.parseLong(profile.getId()));
-        //Check if we have this person in our db.
-        //If yes load profile and continue
-        //Otherwise create new user entry and continue
-        dbConnect("getUser", Long.toString(currUser.getID()));
-    }
-
-    private void displayWelcomeMessage(Profile profile) {
-        if (profile != null) {
-            myTextView.setText("hi " + profile.getName());
-            Intent intent = new Intent(getActivity(), AllRewardsActivity.class);
-            startActivity(intent);
-        }
-    }
-    */
-
-    public SignInActivityFBFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +68,6 @@ public class SignInActivityFBFragment extends Fragment {
         myProfileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-
                 if (currentProfile != null)
                 {
                     currUser.setID(Long.parseLong(currentProfile.getId()));
@@ -104,10 +75,7 @@ public class SignInActivityFBFragment extends Fragment {
                     currUser.setLastName(currentProfile.getLastName());
                     //TODO: set currUser email, birthday, and gender
 
-                    new Users_DatabaseTask(getActivity(), myTextView).execute(currUser);
-
-                    //DatabaseHelper dbh = new DatabaseHelper();
-                    //dbh.doSampleDatabaseStuff("Hi", myTextView);
+                    new Users_DatabaseTask(getActivity()).execute(currUser);
 
                     /*
                     SessionFactory sessionFactory =  new Configuration().configure().buildSessionFactory();
@@ -122,8 +90,6 @@ public class SignInActivityFBFragment extends Fragment {
                     {
                         session.getTransaction().rollback();
                     }*/
-
-                    //dbConnecttemp();
                 }
             }
         };
@@ -132,8 +98,7 @@ public class SignInActivityFBFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sign_in, container, false);
     }
 
@@ -144,15 +109,12 @@ public class SignInActivityFBFragment extends Fragment {
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "read_insights"));
         loginButton.setFragment(this);
         loginButton.registerCallback(myCallbackManager, myCallback);
-
-        myTextView = (TextView) view.findViewById(R.id.ha);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         //Profile profile = Profile.getCurrentProfile();
-        //displayWelcomeMessage(profile);
     }
 
     @Override

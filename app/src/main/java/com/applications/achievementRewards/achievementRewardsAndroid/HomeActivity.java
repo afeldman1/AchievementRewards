@@ -14,6 +14,7 @@ import com.applications.achievementRewards.achievementRewardsAndroid.databaseTas
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievedAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.Adapter_OnWayRewards;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.OnYourWayRewardsModel;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.OnYourWayRewardsModels;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onEvent(List<String> userAchievedAchievementsModels){
+    public void onAchievedAchievementsModelEvent(List<String> userAchievedAchievementsModels){
         ArrayAdapter<String> myAdapter=new
                 ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userAchievedAchievementsModels);
         ListView myList=(ListView)
@@ -49,17 +50,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onOnYourWayRewardsModelEvent(List<OnYourWayRewardsModel> onYourWayRewardsModel) {
+    public void onOnYourWayRewardsModelEvent(OnYourWayRewardsModels onYourWayRewardsModels) {
         ListView myList2 = (ListView) findViewById(R.id.on_way_list);
         myList2.setAdapter(new Adapter_OnWayRewards(this, on_way_rewards));
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-
-
     }
 
     @Override
@@ -86,6 +79,11 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     public void onStop() {
