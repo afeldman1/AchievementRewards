@@ -9,7 +9,7 @@
     <string name="gps_not_enabled">GPS location settings are currently disabled on this device. To enable them for full functionality, you must go to the system settings.</string>
     <string name="gps_enabled">GPS location settings are currently enabled on this device. For full functionality, it is recommended to leave this setting on. However, Battery will be saved without it.</string>
     <string name="network_not_enabled">Network location settings are currently disabled on this device. To enable them for increased functionality, you must go to the system settings.</string>
-    <string name="network_enabled">Network location settings are currently disabled on this device. Enabling them can save battery when tracking location.</string>
+    <string name="network_enabled">Network location settings are currently enabled on this device. Leaving them enabled can save battery when tracking location.</string>
     <string name="open_location_settings">Location Settings</string>
     <string name="Cancel">Cancel</string>
 </resources>
