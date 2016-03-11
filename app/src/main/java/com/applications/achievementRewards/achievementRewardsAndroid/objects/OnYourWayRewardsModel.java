@@ -1,16 +1,26 @@
 package com.applications.achievementRewards.achievementRewardsAndroid.objects;
 
 public class OnYourWayRewardsModel {
+    private int userAchievementId;
     private String merchant;
     private String achievement;
     private double progress;
     private int trackingMax;
 
-    public OnYourWayRewardsModel(String merchant, String achievement, double progress, int trackingMax) {
+    public OnYourWayRewardsModel(int userAchievementId, String merchant, String achievement, double progress, int trackingMax) {
+        this.userAchievementId = userAchievementId;
         this.merchant = merchant;
         this.achievement = achievement;
         this.progress = progress;
         this.trackingMax = trackingMax;
+    }
+
+    public int getUserAchievementId() {
+        return userAchievementId;
+    }
+
+    public void setUserAchievementId(int userAchievementId) {
+        this.userAchievementId = userAchievementId;
     }
 
     public String getMerchant() {

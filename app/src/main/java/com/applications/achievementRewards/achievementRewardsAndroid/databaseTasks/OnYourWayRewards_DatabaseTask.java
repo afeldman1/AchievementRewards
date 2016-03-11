@@ -27,7 +27,7 @@ public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYo
             ResultSet rs = statement.executeQuery(queryString);
 
             while (rs.next()) {
-                onYourWayRewardsModels.add(new OnYourWayRewardsModel(rs.getString("Merchant"), rs.getString("Achievement"), rs.getDouble("Progress"), rs.getInt("TrackingMax")));
+                onYourWayRewardsModels.add(new OnYourWayRewardsModel(rs.getInt("userAchievementsId"), rs.getString("Merchant"), rs.getString("Achievement"), rs.getDouble("Progress"), rs.getInt("TrackingMax")));
             }
         } catch (Exception e) {
             //Db_list.add("Error");

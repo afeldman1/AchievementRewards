@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -32,17 +34,35 @@ public class HomeActivity extends AppCompatActivity {
 
     @Subscribe
     public void onAchievedAchievementsModelEvent(List<String> userAchievedAchievementsModels){
-        ArrayAdapter<String> myAdapter=new
-                ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userAchievedAchievementsModels);
-        ListView myList=(ListView)
-                findViewById(R.id.avail_list);
-        myList.setAdapter(myAdapter);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userAchievedAchievementsModels);
+        ListView achievedAchievementsLV = (ListView) findViewById(R.id.avail_list);
+        achievedAchievementsLV.setAdapter(myAdapter);
+
+        achievedAchievementsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                                                     Intent i = new Intent(HomeActivity.this, RewardDetailsActivity.class);
+                                                     //i.putExtra("TEXT", text);
+                                                     //i.putExtra("IMAGE", img); // <-- Assumed you image is Parcelable
+                                                     startActivity(i);
+                                                 }
+                                             }
+        );
     }
 
     @Subscribe
     public void onOnYourWayRewardsModelEvent(OnYourWayRewardsModels onYourWayRewardsModels) {
-        ListView myList2 = (ListView) findViewById(R.id.on_way_list);
-        myList2.setAdapter(new Adapter_OnWayRewards(this, onYourWayRewardsModels));
+        ListView onYourWayLV = (ListView) findViewById(R.id.on_way_list);
+        onYourWayLV.setAdapter(new Adapter_OnWayRewards(this, onYourWayRewardsModels));
+
+        onYourWayLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                                                     Intent i = new Intent(HomeActivity.this, RewardDetailsActivity.class);
+                                                     //i.putExtra("TEXT", parent.onYourWayRewardsModels.getOnYourWayRewardsModels().get(position).getUserAchievementsId());
+                                                     //i.putExtra("IMAGE", img); // <-- Assumed you image is Parcelable
+                                                     startActivity(i);
+                                                 }
+                                             }
+        );
     }
 
     @Override

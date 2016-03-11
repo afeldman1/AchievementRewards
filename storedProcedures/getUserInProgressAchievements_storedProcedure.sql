@@ -21,7 +21,8 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	SELECT		m.Name AS Merchant,
+	SELECT		ua.Id AS userAchievementsId,
+				m.Name AS Merchant,
 				a.Name AS Achievement,
 				ua.Progress,
 				a.TrackingMax
