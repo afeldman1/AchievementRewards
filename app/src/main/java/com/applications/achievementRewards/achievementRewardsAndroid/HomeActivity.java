@@ -13,7 +13,6 @@ import android.widget.ListView;
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.OnYourWayRewards_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievedAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.Adapter_OnWayRewards;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.OnYourWayRewardsModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.OnYourWayRewardsModels;
 
 import org.greenrobot.eventbus.EventBus;
@@ -22,15 +21,6 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-
-    //String[] avail_rewards = {"availReward1", "availReward2"};
-    String[] on_way_rewards = {"reward1", "reward2"};
-    //String[] secondStringArray = {"Here", "Is", "My", "second", "layout", "woo!"};
-
-    //test to add in one of the composite views
-
-    //CompositeRewardActivity[] onWayRewards = {temp};
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -52,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     @Subscribe
     public void onOnYourWayRewardsModelEvent(OnYourWayRewardsModels onYourWayRewardsModels) {
         ListView myList2 = (ListView) findViewById(R.id.on_way_list);
-        myList2.setAdapter(new Adapter_OnWayRewards(this, on_way_rewards));
+        myList2.setAdapter(new Adapter_OnWayRewards(this, onYourWayRewardsModels));
     }
 
     @Override

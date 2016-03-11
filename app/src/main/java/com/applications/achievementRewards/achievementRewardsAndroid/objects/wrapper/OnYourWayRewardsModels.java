@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OnYourWayRewardsModels {
-    List<OnYourWayRewardsModel> onYourWayRewardsModels;
+    private List<OnYourWayRewardsModel> onYourWayRewardsModels;
 
     public OnYourWayRewardsModels() {
         this.onYourWayRewardsModels = new ArrayList<>();

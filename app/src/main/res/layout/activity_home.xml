@@ -9,40 +9,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.applications.achievementRewards.achievementRewardsAndroid.HomeActivity">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Available Rewards"
-            android:id="@+id/avail_text"
-            android:layout_marginBottom="10dp"/>
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/avail_text"
-            android:id="@+id/avail_list"></ListView>
 
-    </RelativeLayout>
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="On Your Way Rewards"
-            android:id="@+id/on_way_text"
-            android:layout_marginBottom="10dp"/>
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/on_way_text"
-            android:id="@+id/on_way_list" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:text="Available Rewards"
+        android:id="@+id/avail_text"
+        android:layout_marginBottom="10dp"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:layout_below="@id/avail_text"
+        android:id="@+id/avail_list"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="On Your Way Rewards"
+        android:id="@+id/on_way_text"
+        android:layout_marginBottom="10dp"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:layout_below="@id/on_way_text"
+        android:id="@+id/on_way_list" />
 </LinearLayout>
