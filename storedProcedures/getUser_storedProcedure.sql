@@ -24,6 +24,7 @@ BEGIN
 
 	SELECT	FirstName,
 			LastName,
+			Email,
 			Gender,
 			Birthday
 	FROM	tbl_Users

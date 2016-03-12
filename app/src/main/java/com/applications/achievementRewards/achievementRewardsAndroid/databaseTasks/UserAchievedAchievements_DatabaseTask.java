@@ -7,6 +7,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,13 @@ public class UserAchievedAchievements_DatabaseTask extends AsyncTask<Long, Integ
     @Override
     protected List<String> doInBackground(Long... params) {
         List<String> userAchievedAchievementsModels = new ArrayList<>();
+        Connection conn = null;
+
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
 
             String ConnectionString = "jdbc:jtds:sqlserver://dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com:1433/achievmentRewardsDB";
-            Connection conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
+            conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
 
             Statement statement = conn.createStatement();
             String queryString = "EXEC getAchievedAchievements " + params[0].toString();
@@ -30,8 +33,13 @@ public class UserAchievedAchievements_DatabaseTask extends AsyncTask<Long, Integ
                 userAchievedAchievementsModels.add(rs.getString("Merchant") + ": " + rs.getString("Achievement"));
             }
         } catch (Exception e) {
-            //Db_list.add("Error");
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return userAchievedAchievementsModels;

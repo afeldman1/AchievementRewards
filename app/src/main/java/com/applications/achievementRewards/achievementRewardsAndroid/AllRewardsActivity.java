@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUserModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementsModel;
 
 import org.greenrobot.eventbus.EventBus;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllRewardsActivity extends AppCompatActivity {
-    private CurrentUser currUser;
+    private CurrentUserModel currUser;
 
     //ListView list;
     //UserAchievementsCustomAdapter adapter;
@@ -90,7 +91,7 @@ public class AllRewardsActivity extends AppCompatActivity {
         });*/
     }
 
-    // This method will be called when a CurrentUser is posted
+    // This method will be called when a CurrentUserModel is posted
     @Subscribe
     public void onEvent(List<UserAchievementsModel> userAchievementData){
 

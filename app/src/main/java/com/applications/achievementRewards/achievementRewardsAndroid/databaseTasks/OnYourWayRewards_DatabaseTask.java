@@ -9,6 +9,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYourWayRewardsModels> {
@@ -16,11 +17,13 @@ public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYo
     @Override
     protected OnYourWayRewardsModels doInBackground(Long... params) {
         OnYourWayRewardsModels onYourWayRewardsModels = new OnYourWayRewardsModels();
+        Connection conn = null;
+
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
 
             String ConnectionString = "jdbc:jtds:sqlserver://dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com:1433/achievmentRewardsDB";
-            Connection conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
+            conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
 
             Statement statement = conn.createStatement();
             String queryString = "EXEC getUserInProgressAchievements " + params[0].toString();
@@ -30,8 +33,13 @@ public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYo
                 onYourWayRewardsModels.add(new OnYourWayRewardsModel(rs.getInt("userAchievementsId"), rs.getString("Merchant"), rs.getString("Achievement"), rs.getDouble("Progress"), rs.getInt("TrackingMax")));
             }
         } catch (Exception e) {
-            //Db_list.add("Error");
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return onYourWayRewardsModels;

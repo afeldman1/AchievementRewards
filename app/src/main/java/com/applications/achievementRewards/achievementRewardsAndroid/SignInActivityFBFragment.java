@@ -6,10 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.Users_DatabaseTask;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUserModel;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -32,7 +32,7 @@ public class SignInActivityFBFragment extends Fragment {
     private AccessTokenTracker myTokenTracker;
     private ProfileTracker myProfileTracker;
 
-    private CurrentUser currUser = new CurrentUser();
+    private CurrentUserModel currUser = new CurrentUserModel();
 
     private FacebookCallback<LoginResult> myCallback = new FacebookCallback<LoginResult>() {
         @Override
