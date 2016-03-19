@@ -10,28 +10,28 @@ import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.R;
 
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.OnYourWayRewardsModels;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.UserAchievementModels;
 
 public class Adapter_OnWayRewards extends BaseAdapter{
     Context context;
-    OnYourWayRewardsModels onYourWayRewardsModels;
+    UserAchievementModels userAchievementModels;
     private static LayoutInflater inflater = null;
 
-    public Adapter_OnWayRewards(Context context, OnYourWayRewardsModels onYourWayRewardsModels) {
+    public Adapter_OnWayRewards(Context context, UserAchievementModels userAchievementModels) {
         this.context = context;
-        this.onYourWayRewardsModels = onYourWayRewardsModels;
+        this.userAchievementModels = userAchievementModels;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return onYourWayRewardsModels.getOnYourWayRewardsModels().size();
+        return userAchievementModels.getUserAchievementModels().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return  onYourWayRewardsModels.getOnYourWayRewardsModels().get(position);
+        return  userAchievementModels.getUserAchievementModels().get(position);
     }
 
     @Override
@@ -46,14 +46,14 @@ public class Adapter_OnWayRewards extends BaseAdapter{
             vi = inflater.inflate(R.layout.composite_onway_rewards, null);
 
         TextView merchant_tv = (TextView) vi.findViewById(R.id.merchant_tv);
-        merchant_tv.setText(((OnYourWayRewardsModel)getItem(position)).getMerchant());
+        merchant_tv.setText(((UserAchievementModel)getItem(position)).getMerchantName());
 
         TextView achievement_tv = (TextView) vi.findViewById(R.id.achievement_tv);
-        achievement_tv.setText(((OnYourWayRewardsModel) getItem(position)).getAchievement());
+        achievement_tv.setText(((UserAchievementModel) getItem(position)).getAchievementName());
 
         ProgressBar progress_bar = (ProgressBar) vi.findViewById(R.id.progress_bar);
-        progress_bar.setMax(((OnYourWayRewardsModel)getItem(position)).getTrackingMax());
-        progress_bar.setProgress((int) Math.round((((OnYourWayRewardsModel) getItem(position)).getProgress())));
+        progress_bar.setMax(((UserAchievementModel)getItem(position)).getTrackingMax());
+        progress_bar.setProgress((int) Math.round((((UserAchievementModel) getItem(position)).getProgress())));
 
         return vi;
     }

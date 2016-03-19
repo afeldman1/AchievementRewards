@@ -1,8 +1,9 @@
 package com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks;
 
 import android.os.AsyncTask;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.OnYourWayRewardsModel;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.OnYourWayRewardsModels;
+
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.UserAchievementModels;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -12,11 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYourWayRewardsModels> {
+public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, UserAchievementModels> {
 
     @Override
-    protected OnYourWayRewardsModels doInBackground(Long... params) {
-        OnYourWayRewardsModels onYourWayRewardsModels = new OnYourWayRewardsModels();
+    protected UserAchievementModels doInBackground(Long... params) {
+        UserAchievementModels userAchievementModels = new UserAchievementModels();
         Connection conn = null;
 
         try {
@@ -30,7 +31,7 @@ public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYo
             ResultSet rs = statement.executeQuery(queryString);
 
             while (rs.next()) {
-                onYourWayRewardsModels.add(new OnYourWayRewardsModel(rs.getInt("userAchievementsId"), rs.getString("Merchant"), rs.getString("Achievement"), rs.getDouble("Progress"), rs.getInt("TrackingMax")));
+                userAchievementModels.add(new UserAchievementModel(rs.getInt("userAchievementsId"), rs.getString("Merchant"), rs.getString("Achievement"), rs.getDouble("Progress"), rs.getInt("TrackingMax")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,11 +43,11 @@ public class OnYourWayRewards_DatabaseTask extends AsyncTask<Long, Integer, OnYo
             }
         }
 
-        return onYourWayRewardsModels;
+        return userAchievementModels;
     }
 
     @Override
-    protected void onPostExecute(OnYourWayRewardsModels userAchievementModels) {
+    protected void onPostExecute(UserAchievementModels userAchievementModels) {
         //super.onPostExecute(currentUsers);
 
         EventBus.getDefault().post(userAchievementModels);

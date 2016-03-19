@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.AllRewardsActivity;
 import com.applications.achievementRewards.achievementRewardsAndroid.R;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementsModel;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,11 +32,11 @@ public class UserAchievementsCustomAdapter extends BaseAdapter implements View.O
     private ArrayList data;
     private static LayoutInflater inflater=null;
     public Resources res;
-    UserAchievementsModel tempValues=null;
+    UserAchievementModel tempValues=null;
     int i=0;
 
     /*************  CustomAdapter Constructor *****************/
-    public UserAchievementsCustomAdapter(Activity a, ArrayList<UserAchievementsModel> d,Resources resLocal) {
+    public UserAchievementsCustomAdapter(Activity a, ArrayList<UserAchievementModel> d,Resources resLocal) {
         activity = a;
         data = (ArrayList) d;
         res = resLocal;
@@ -105,13 +105,13 @@ public class UserAchievementsCustomAdapter extends BaseAdapter implements View.O
         {
             /***** Get each Model object from Arraylist ********/
             tempValues = null;
-            tempValues = ( UserAchievementsModel ) data.get( position );
+            tempValues = (UserAchievementModel) data.get( position );
 
             /************  Set Model values in Holder elements ***********/
 
             holder.tvName.setText(tempValues.getAchievementName());
             holder.tvDescription.setText(tempValues.getAchievementDescription());
-
+/*
             if (URLUtil.isValidUrl(tempValues.getMerchantLogoURL()))
             {
                 try {
@@ -128,7 +128,7 @@ public class UserAchievementsCustomAdapter extends BaseAdapter implements View.O
                                 "@mipmap/no_company"
                                 , null, null));
             }
-
+*/
             //profile_photo.setImageBitmap(BitmapFactory.decodeStream((new URL()).openConnection().getInputStream()));
 
 

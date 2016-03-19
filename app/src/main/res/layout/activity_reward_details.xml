@@ -1,27 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".RewardDetailsActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="horizontal"
+    tools:context="com.applications.achievementRewards.achievementRewardsAndroid.activity_reward_details">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_reward_details" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:id="@+id/merchant_logo_tv"
+        android:contentDescription="merchant_logo"
+        android:src="@mipmap/no_company"
+        android:layout_alignParentLeft="true"
+        android:focusable="false"/>
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Achievement Name"
+        android:id="@+id/achievement_name_tv"
+        android:layout_gravity="left"
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/merchant_logo_tv"
+        android:layout_toEndOf="@+id/merchant_logo_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Merchant Name"
+        android:id="@+id/merchant_name_tv"
+        android:layout_gravity="left"
+        android:focusable="false"
+        android:layout_below="@+id/achievement_name_tv"
+        android:layout_alignLeft="@+id/achievement_name_tv"
+        android:layout_alignStart="@+id/achievement_name_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="This is a small description about the reward. "
+        android:id="@+id/reward_desc_tv"
+        android:layout_gravity="left"
+        android:focusable="false"
+        android:layout_below="@+id/merchant_name_tv"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Reward Name"
+        android:id="@+id/reward_name_tv"
+        android:layout_gravity="left"
+        android:focusable="false"
+        android:layout_below="@+id/reward_desc_tv"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="This is a small description about the achievement. "
+        android:id="@+id/achievement_desc_tv"
+        android:layout_gravity="left"
+        android:focusable="false"
+        android:layout_below="@+id/reward_name_tv"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="redeem"
+        android:id="@+id/redeem_btn"
+        android:layout_above="@+id/ProgressBar"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/ProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:maxHeight="10dip"
+        android:minHeight="10dip"
+        android:progress="50"
+        android:layout_alignParentBottom="true"
+        android:progressDrawable="@drawable/custom_progressbar"
+        android:visibility="visible" />
+
+</RelativeLayout>

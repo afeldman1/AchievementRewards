@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUserModel;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementsModel;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,7 +28,7 @@ public class AllRewardsActivity extends AppCompatActivity {
     //ListView list;
     //UserAchievementsCustomAdapter adapter;
     //public AllRewardsActivity CustomListView = null;
-    public  List<UserAchievementsModel> userAchievementData;
+    public  List<UserAchievementModel> userAchievementData;
 
     public ArrayList<CompositeRewardActivity> all_companies = new ArrayList<CompositeRewardActivity>();
 
@@ -37,8 +37,8 @@ public class AllRewardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_rewards_screen);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        new UserAchievements_DatabaseTask().execute(sharedPreferences.getLong("currUserID", 0));
+        //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //new UserAchievements_DatabaseTask().execute(sharedPreferences.getLong("currUserID", 0));
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -70,7 +70,7 @@ public class AllRewardsActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             System.out.println("HI");
-                            Intent intent = new Intent(getApplicationContext(), RewardDetailsActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), AchievementDetailsActivity.class);
                             startActivityForResult(intent, 100);
                         }
                     });
@@ -93,9 +93,9 @@ public class AllRewardsActivity extends AppCompatActivity {
 
     // This method will be called when a CurrentUserModel is posted
     @Subscribe
-    public void onEvent(List<UserAchievementsModel> userAchievementData){
+    public void onEvent(List<UserAchievementModel> userAchievementData){
 
-        UserAchievementsModel userAchievementsModel;
+        UserAchievementModel userAchievementModel;
         //setContentView(R.layout.user_achievements_view);
 
         this.userAchievementData = userAchievementData;
@@ -129,7 +129,7 @@ public class AllRewardsActivity extends AppCompatActivity {
         // SHOW ALERT
 
         //System.out.println("HI");
-        UserAchievementsModel tempValues = userAchievementData.get(mPosition);
+        UserAchievementModel tempValues = userAchievementData.get(mPosition);
 
         Intent intent = new Intent(getApplicationContext(), RewardDetailsActivity.class);
         startActivityForResult(intent, 100);
