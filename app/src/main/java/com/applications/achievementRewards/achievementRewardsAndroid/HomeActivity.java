@@ -12,10 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.OnYourWayRewards_DatabaseTask;
-import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievedAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.Adapter_OnWayRewards;
+import com.applications.achievementRewards.achievementRewardsAndroid.adaptors.Adapter_OnWayRewards;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.UserAchievementModels;
 
@@ -37,7 +35,8 @@ public class HomeActivity extends AppCompatActivity {
     @Subscribe
     public void onDataLoadEvent(UserAchievementModels userAchievementModels) {
         UserAchievementModels onYourWayRewards = new UserAchievementModels();
-        List<String> achievedAchievements = new ArrayList<>();
+        final UserAchievementModels achievedAchievements = new UserAchievementModels();
+        List<String> achievedAchievementLabels = new ArrayList<>();
 
         for (UserAchievementModel userAchievementModel : userAchievementModels ) {
             if (userAchievementModel.getProgress() < userAchievementModel.getTrackingMax())
@@ -46,7 +45,8 @@ public class HomeActivity extends AppCompatActivity {
             }
             if (userAchievementModel.getProgress() == userAchievementModel.getTrackingMax())
             {
-                achievedAchievements.add(userAchievementModel.getMerchantName() + ": " + userAchievementModel.getAchievementName());
+                achievedAchievements.add(userAchievementModel);
+                achievedAchievementLabels.add(userAchievementModel.getMerchantName() + ": " + userAchievementModel.getAchievementName());
             }
         }
 
@@ -62,16 +62,17 @@ public class HomeActivity extends AppCompatActivity {
                                              }
         );
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, achievedAchievements);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, achievedAchievementLabels);
         ListView achievedAchievementsLV = (ListView) findViewById(R.id.avail_list);
         achievedAchievementsLV.setAdapter(myAdapter);
 
         achievedAchievementsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                           public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                                                              Intent i = new Intent(HomeActivity.this, AchievementDetailsActivity.class);
+                                                              Intent in = new Intent(HomeActivity.this, AchievementDetailsActivity.class);
+                                                              in.putExtra("USERACHIEVEMENTMODEL", achievedAchievements.getUserAchievementModel(position));
                                                               //i.putExtra("TEXT", text);
                                                               //i.putExtra("IMAGE", img); // <-- Assumed you image is Parcelable
-                                                              startActivity(i);
+                                                              startActivity(in);
                                                           }
                                                       }
         );

@@ -1,4 +1,4 @@
-package com.applications.achievementRewards.achievementRewardsAndroid.objects;
+package com.applications.achievementRewards.achievementRewardsAndroid.adaptors;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.R;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.UserAchievementModels;
 
 public class Adapter_OnWayRewards extends BaseAdapter{

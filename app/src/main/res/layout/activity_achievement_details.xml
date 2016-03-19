@@ -41,6 +41,7 @@
         android:text="Merchant Name"
         android:id="@+id/merchant_name_tv"
         android:focusable="false"
+        android:layout_marginTop="4pt"
         android:layout_alignBottom="@+id/merchant_logo_iv"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -112,5 +113,18 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Redeemed At tv"
+        android:gravity="center"
+        android:id="@+id/redeemed_at_tv"
+        android:layout_gravity="right"
+        android:focusable="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

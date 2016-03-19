@@ -20,25 +20,44 @@ public class AchievementDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         UserAchievementModel userAchievementModel = intent.getParcelableExtra("USERACHIEVEMENTMODEL");
 
-        TextView merchantTv = (TextView) findViewById(R.id.merchant_name_tv);
-        merchantTv.setText(userAchievementModel.getMerchantName());
-
         TextView achievementNameTv = (TextView) findViewById(R.id.achievement_name_tv);
-        achievementNameTv.setText(userAchievementModel.getMerchantName());
+        achievementNameTv.setText(userAchievementModel.getAchievementName());
+
+        TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
+        merchantNameTv.setText(userAchievementModel.getMerchantName());
+
+        TextView achievementDescTv = (TextView) findViewById(R.id.achievement_desc_tv);
+        achievementDescTv.setText(userAchievementModel.getAchievementDescription());
+
+        TextView rewardNameTv = (TextView) findViewById(R.id.reward_name_tv);
+        rewardNameTv.setText(userAchievementModel.getRewardName());
+
+        TextView rewardDescTv = (TextView) findViewById(R.id.reward_desc_tv);
+        rewardDescTv.setText(userAchievementModel.getRewardDescription());
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         Button redeemBtn = (Button) findViewById(R.id.redeem_btn);
+        TextView redeemedAtTv = (TextView) findViewById(R.id.redeemed_at_tv);
         if(userAchievementModel.getProgress() != userAchievementModel.getTrackingMax())
         {
             redeemBtn.setVisibility(View.GONE);
+            redeemedAtTv.setVisibility(View.GONE);
             progressBar.setMax(userAchievementModel.getTrackingMax());
             progressBar.setProgress((int) Math.round(userAchievementModel.getProgress()));
             progressBar.setVisibility(View.VISIBLE);
         }
-        else
+        else if(userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() == null)
         {
             progressBar.setVisibility(View.GONE);
+            redeemedAtTv.setVisibility(View.GONE);
             redeemBtn.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            redeemBtn.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            redeemedAtTv.setText("Redeemed on: " + userAchievementModel.getRedeemedAt());
+            redeemedAtTv.setVisibility(View.VISIBLE);
         }
     }
 }

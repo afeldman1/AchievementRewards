@@ -21,6 +21,10 @@ public class UserAchievementModels implements Iterable<UserAchievementModel> {
         this.userAchievementModels = userAchievementModels;
     }
 
+    public UserAchievementModel getUserAchievementModel(int pos) {
+        return userAchievementModels.get(pos);
+    }
+
     public void add(UserAchievementModel userAchievementModel) {
         this.userAchievementModels.add(userAchievementModel);
     }
