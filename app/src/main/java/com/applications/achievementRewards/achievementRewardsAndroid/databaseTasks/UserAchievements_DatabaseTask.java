@@ -7,7 +7,6 @@ import com.applications.achievementRewards.achievementRewardsAndroid.objects.wra
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -28,7 +27,7 @@ public class UserAchievements_DatabaseTask extends AsyncTask<Long, Integer, User
             String ConnectionString = "jdbc:jtds:sqlserver://dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com:1433/achievmentRewardsDB";
             conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
 
-            String queryString = "EXEC getAchievementDetails ?";
+            String queryString = "EXEC getUserAchievements ?";
             preparedStatement = conn.prepareStatement(queryString);
             preparedStatement.setLong(1, params[0]);
 
@@ -39,12 +38,7 @@ public class UserAchievements_DatabaseTask extends AsyncTask<Long, Integer, User
 
                 userAchievementModel.setUserAchievementId(rs.getInt("UserAchievementId"));
                 userAchievementModel.setAchievementName(rs.getString("AchievementName"));
-                userAchievementModel.setAchievementDescription(rs.getString("AchievementDescription"));
-                userAchievementModel.setRewardName(rs.getString("RewardName"));
-                userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
                 userAchievementModel.setMerchantName(rs.getString("MerchantName"));
-                userAchievementModel.setMerchantDescription(rs.getString("MerchantDescription"));
-                userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
                 userAchievementModel.setProgress(rs.getDouble("Progress"));
                 userAchievementModel.setTrackingMax(rs.getInt("TrackingMax"));
                 userAchievementModel.setRedeemedAt(rs.getDate("RedeemedAt"));

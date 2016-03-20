@@ -38,12 +38,12 @@ public class HomeActivity extends AppCompatActivity {
         final UserAchievementModels achievedAchievements = new UserAchievementModels();
         List<String> achievedAchievementLabels = new ArrayList<>();
 
-        for (UserAchievementModel userAchievementModel : userAchievementModels ) {
+        for (UserAchievementModel userAchievementModel : userAchievementModels) {
             if (userAchievementModel.getProgress() < userAchievementModel.getTrackingMax())
             {
                 onYourWayRewards.add(userAchievementModel);
             }
-            if (userAchievementModel.getProgress() == userAchievementModel.getTrackingMax())
+            if (userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() == null)
             {
                 achievedAchievements.add(userAchievementModel);
                 achievedAchievementLabels.add(userAchievementModel.getMerchantName() + ": " + userAchievementModel.getAchievementName());

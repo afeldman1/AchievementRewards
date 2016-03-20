@@ -11,6 +11,9 @@ import android.widget.Switch;
 import android.content.DialogInterface;
 import android.app.AlertDialog;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -22,6 +25,20 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        AccessTokenTracker fbTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken newAccessToken) {
+                if (newAccessToken == null) {
+                    Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                            Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
 
         LocationManager lm = null;
         boolean gps_enabled=false,network_enabled=false;

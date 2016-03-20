@@ -57,25 +57,23 @@ public class SignInActivityFBFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         myCallbackManager = CallbackManager.Factory.create();
+
         myTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
 
             }
         };
+
         myProfileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                 if (currentProfile != null)
                 {
-                    currUser.setID(Long.parseLong(currentProfile.getId()));
-                    currUser.setFirstName(currentProfile.getFirstName());
-                    currUser.setLastName(currentProfile.getLastName());
-                    //TODO: set currUser email, birthday, and gender
-
-                    new Users_DatabaseTask(getActivity()).execute(currUser);
+                    loadUser();
 
                     /*
                     SessionFactory sessionFactory =  new Configuration().configure().buildSessionFactory();
@@ -95,6 +93,25 @@ public class SignInActivityFBFragment extends Fragment {
         };
         myTokenTracker.startTracking();
         myProfileTracker.startTracking();
+
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if(accessToken != null)
+        {
+            loadUser();
+        }
+    }
+
+    private void loadUser()
+    {
+        Profile currentProfile = Profile.getCurrentProfile();
+
+        currUser.setID(Long.parseLong(currentProfile.getId()));
+        currUser.setFirstName(currentProfile.getFirstName());
+        currUser.setLastName(currentProfile.getLastName());
+        //TODO: set currUser email, birthday, and gender
+
+        new Users_DatabaseTask(getActivity()).execute(currUser);
     }
 
     @Override

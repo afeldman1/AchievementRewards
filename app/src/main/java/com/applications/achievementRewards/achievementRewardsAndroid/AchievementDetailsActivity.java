@@ -8,7 +8,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievementDetails_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class AchievementDetailsActivity extends AppCompatActivity {
 
@@ -20,20 +24,13 @@ public class AchievementDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         UserAchievementModel userAchievementModel = intent.getParcelableExtra("USERACHIEVEMENTMODEL");
 
+        new UserAchievementDetails_DatabaseTask().execute(userAchievementModel);
+
         TextView achievementNameTv = (TextView) findViewById(R.id.achievement_name_tv);
         achievementNameTv.setText(userAchievementModel.getAchievementName());
 
         TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
         merchantNameTv.setText(userAchievementModel.getMerchantName());
-
-        TextView achievementDescTv = (TextView) findViewById(R.id.achievement_desc_tv);
-        achievementDescTv.setText(userAchievementModel.getAchievementDescription());
-
-        TextView rewardNameTv = (TextView) findViewById(R.id.reward_name_tv);
-        rewardNameTv.setText(userAchievementModel.getRewardName());
-
-        TextView rewardDescTv = (TextView) findViewById(R.id.reward_desc_tv);
-        rewardDescTv.setText(userAchievementModel.getRewardDescription());
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         Button redeemBtn = (Button) findViewById(R.id.redeem_btn);
@@ -59,5 +56,29 @@ public class AchievementDetailsActivity extends AppCompatActivity {
             redeemedAtTv.setText("Redeemed on: " + userAchievementModel.getRedeemedAt());
             redeemedAtTv.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Subscribe
+    public void onDataLoadEvent(UserAchievementModel userAchievementModel) {
+        TextView achievementDescTv = (TextView) findViewById(R.id.achievement_desc_tv);
+        achievementDescTv.setText(userAchievementModel.getAchievementDescription());
+
+        TextView rewardNameTv = (TextView) findViewById(R.id.reward_name_tv);
+        rewardNameTv.setText(userAchievementModel.getRewardName());
+
+        TextView rewardDescTv = (TextView) findViewById(R.id.reward_desc_tv);
+        rewardDescTv.setText(userAchievementModel.getRewardDescription());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }
