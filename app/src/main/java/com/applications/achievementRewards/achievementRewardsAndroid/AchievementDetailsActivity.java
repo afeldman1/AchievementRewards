@@ -22,7 +22,7 @@ public class AchievementDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_achievement_details);
 
         Intent intent = getIntent();
-        UserAchievementModel userAchievementModel = intent.getParcelableExtra("USERACHIEVEMENTMODEL");
+        final UserAchievementModel userAchievementModel = intent.getParcelableExtra("USERACHIEVEMENTMODEL");
 
         new UserAchievementDetails_DatabaseTask().execute(userAchievementModel);
 
@@ -31,6 +31,14 @@ public class AchievementDetailsActivity extends AppCompatActivity {
 
         TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
         merchantNameTv.setText(userAchievementModel.getMerchantName());
+        merchantNameTv.setOnClickListener(new TextView.OnClickListener() {
+            public void onClick(View v) {
+                Intent in = new Intent(AchievementDetailsActivity.this, MerchantDetailsActivity.class);
+                in.putExtra("MERCHANTID", userAchievementModel.getMerchantId());
+                in.putExtra("MERCHANTNAME", userAchievementModel.getMerchantName());
+                startActivity(in);
+            }
+        });
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         Button redeemBtn = (Button) findViewById(R.id.redeem_btn);
@@ -43,13 +51,13 @@ public class AchievementDetailsActivity extends AppCompatActivity {
             progressBar.setProgress((int) Math.round(userAchievementModel.getProgress()));
             progressBar.setVisibility(View.VISIBLE);
         }
-        else if(userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() == null)
+        else if(userAchievementModel.getProgress() != null && userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() == null)
         {
             progressBar.setVisibility(View.GONE);
             redeemedAtTv.setVisibility(View.GONE);
             redeemBtn.setVisibility(View.VISIBLE);
         }
-        else
+        else if(userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() != null)
         {
             redeemBtn.setVisibility(View.GONE);
             progressBar.setVisibility(View.GONE);
@@ -63,7 +71,7 @@ public class AchievementDetailsActivity extends AppCompatActivity {
         TextView achievementDescTv = (TextView) findViewById(R.id.achievement_desc_tv);
         achievementDescTv.setText(userAchievementModel.getAchievementDescription());
 
-        TextView rewardNameTv = (TextView) findViewById(R.id.reward_name_tv);
+        TextView rewardNameTv = (TextView) findViewById(R.id.merchant_description_tv);
         rewardNameTv.setText(userAchievementModel.getRewardName());
 
         TextView rewardDescTv = (TextView) findViewById(R.id.reward_desc_tv);

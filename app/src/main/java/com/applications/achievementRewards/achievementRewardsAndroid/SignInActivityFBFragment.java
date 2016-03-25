@@ -59,6 +59,7 @@ public class SignInActivityFBFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+
         myCallbackManager = CallbackManager.Factory.create();
 
         myTokenTracker = new AccessTokenTracker() {
@@ -94,9 +95,8 @@ public class SignInActivityFBFragment extends Fragment {
         myTokenTracker.startTracking();
         myProfileTracker.startTracking();
 
-
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        if(accessToken != null)
+        Profile currentProfile = Profile.getCurrentProfile();
+        if(AccessToken.getCurrentAccessToken() != null)
         {
             loadUser();
         }
@@ -126,12 +126,6 @@ public class SignInActivityFBFragment extends Fragment {
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "read_insights"));
         loginButton.setFragment(this);
         loginButton.registerCallback(myCallbackManager, myCallback);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //Profile profile = Profile.getCurrentProfile();
     }
 
     @Override

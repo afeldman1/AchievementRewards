@@ -2,7 +2,6 @@ package com.applications.achievementRewards.achievementRewardsAndroid.objects;
 
 public class MerchantLocModel {
     private int merchantLocId;
-    private int merchantId;
     private double lat;
     private double lon;
     private String address;
@@ -15,14 +14,6 @@ public class MerchantLocModel {
 
     public void setMerchantLocId(int merchantLocId) {
         this.merchantLocId = merchantLocId;
-    }
-
-    public int getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(int merchantId) {
-        this.merchantId = merchantId;
     }
 
     public double getLat() {

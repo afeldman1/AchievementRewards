@@ -1,9 +1,14 @@
 package com.applications.achievementRewards.achievementRewardsAndroid.objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MerchantModel {
     private int merchantId;
     private String merchantName;
     private String merchantDescription;
+    private List<MerchantLocModel> merchantLocModels = new ArrayList<>();
+    private List<UserAchievementModel> userAchievementModels = new ArrayList<>();
 
     public int getMerchantId() {
         return merchantId;
@@ -27,5 +32,29 @@ public class MerchantModel {
 
     public void setMerchantDescription(String merchantDescription) {
         this.merchantDescription = merchantDescription;
+    }
+
+    public List<MerchantLocModel> getMerchantLocModels() {
+        return merchantLocModels;
+    }
+
+    public void setMerchantLocModels(List<MerchantLocModel> merchantLocModels) {
+        this.merchantLocModels = merchantLocModels;
+    }
+
+    public void addMerchantLocModel(MerchantLocModel merchantLocModel) {
+        this.merchantLocModels.add(merchantLocModel);
+    }
+
+    public List<UserAchievementModel> getUserAchievementModels() {
+        return userAchievementModels;
+    }
+
+    public void setUserAchievementModels(List<UserAchievementModel> userAchievementModels) {
+        this.userAchievementModels = userAchievementModels;
+    }
+
+    public void addUserAchievementModel(UserAchievementModel userAchievementModel) {
+        this.userAchievementModels.add(userAchievementModel);
     }
 }

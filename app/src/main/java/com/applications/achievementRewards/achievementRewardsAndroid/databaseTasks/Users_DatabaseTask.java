@@ -144,6 +144,7 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUserModel, Integer, Cur
         editor.commit();
 
         Intent intent = new Intent(myFragmentActivity, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         myFragmentActivity.startActivity(intent);
     }
 }

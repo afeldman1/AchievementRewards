@@ -27,18 +27,38 @@ public class UserAchievementDetails_DatabaseTask extends AsyncTask<UserAchieveme
             String ConnectionString = "jdbc:jtds:sqlserver://dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com:1433/achievmentRewardsDB";
             conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
 
-            String queryString = "EXEC getAchievementDetails ?";
-            preparedStatement = conn.prepareStatement(queryString);
-            preparedStatement.setInt(1, userAchievementModel.getUserAchievementId());
+            if(userAchievementModel.getUserAchievementId() == null)
+            {
+                String queryString = "EXEC getAchievementDetails @aID=?";
+                preparedStatement = conn.prepareStatement(queryString);
+                preparedStatement.setInt(1, userAchievementModel.getAchievementId());
 
-            ResultSet rs = preparedStatement.executeQuery();
+                ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                userAchievementModel.setAchievementDescription(rs.getString("AchievementDescription"));
-                userAchievementModel.setRewardName(rs.getString("RewardName"));
-                userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
-                userAchievementModel.setMerchantDescription(rs.getString("MerchantDescription"));
-                userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
+                while (rs.next()) {
+                    userAchievementModel.setAchievementDescription(rs.getString("AchievementDescription"));
+                    userAchievementModel.setRewardName(rs.getString("RewardName"));
+                    userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
+                    userAchievementModel.setMerchantId(rs.getInt("MerchantId"));
+                    userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
+                }
+            }
+            else
+            {
+                String queryString = "EXEC getAchievementDetails @uaID=?";
+                preparedStatement = conn.prepareStatement(queryString);
+                preparedStatement.setInt(1, userAchievementModel.getUserAchievementId());
+
+                ResultSet rs = preparedStatement.executeQuery();
+
+                while (rs.next()) {
+                    userAchievementModel.setAchievementId(rs.getInt("AchievementId"));
+                    userAchievementModel.setAchievementDescription(rs.getString("AchievementDescription"));
+                    userAchievementModel.setRewardName(rs.getString("RewardName"));
+                    userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
+                    userAchievementModel.setMerchantId(rs.getInt("MerchantId"));
+                    userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
