@@ -73,7 +73,7 @@ public class AchievementDetailsActivity extends AppCompatActivity {
         TextView achievementDescTv = (TextView) findViewById(R.id.achievement_desc_tv);
         achievementDescTv.setText(userAchievementModel.getAchievementDescription());
 
-        TextView rewardNameTv = (TextView) findViewById(R.id.merchant_description_tv);
+        TextView rewardNameTv = (TextView) findViewById(R.id.reward_name_tv);
         rewardNameTv.setText(userAchievementModel.getRewardName());
 
         TextView rewardDescTv = (TextView) findViewById(R.id.reward_desc_tv);

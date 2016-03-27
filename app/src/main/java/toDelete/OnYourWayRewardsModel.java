@@ -1,4 +1,4 @@
-package com.applications.achievementRewards.achievementRewardsAndroid.objects;
+package toDelete;
 
 public class OnYourWayRewardsModel {
     private int userAchievementId;

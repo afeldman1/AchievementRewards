@@ -22,6 +22,9 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
+	INSERT INTO tbl_usage
+	VALUES(@fbID, dateadd(hour, -4, GETDATE()))
+
 	SELECT	FirstName,
 			LastName,
 			Email,

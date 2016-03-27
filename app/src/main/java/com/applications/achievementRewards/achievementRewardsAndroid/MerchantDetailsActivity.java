@@ -57,7 +57,7 @@ public class MerchantDetailsActivity extends AppCompatActivity {
         merchantAchievementsLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                           public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                                                               Intent in = new Intent(MerchantDetailsActivity.this, AchievementDetailsActivity.class);
-                                                              //in.putExtra("USERACHIEVEMENTMODEL", merchantModel.getUserAchievementModels().get(position));
+                                                              in.putExtra("USERACHIEVEMENTMODEL", merchantModel.getUserAchievementModels().get(position));
                                                               startActivity(in);
                                                           }
                                                       }

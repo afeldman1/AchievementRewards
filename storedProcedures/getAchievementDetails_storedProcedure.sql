@@ -10,29 +10,38 @@ DROP PROCEDURE [dbo].[getAchievementDetails]
 GO
 
 CREATE PROCEDURE getAchievementDetails
-	@uaID INT
+	@uaID INT = NULL,
+	@aID INT = NULL
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	SELECT		ua.Id AS UserAchievementId,
-				a.Name AS AchievementName,
+IF @uaID IS NOT NULL
+BEGIN
+	SELECT		a.Id AS AchievementId,
 				a.Description AS AchievementDescription,
 				a.RewardName,
 				a.RewardDescription,
-				m.Name AS MerchantName,
-				m.Description AS MerchantDescription,
-				m.LogoUrl,
-				ua.Progress,
-				a.TrackingMax,
-				ua.RedeemedAt
-	FROM		tbl_userAchievements ua 
-	LEFT JOIN	tbl_Achievements a ON ua.AchievementId = a.Id
+				m.Id AS MerchantId,
+				m.LogoUrl
+	FROM		tbl_Achievements a 
+	LEFT JOIN	tbl_userAchievements ua ON ua.AchievementId = a.Id
 	LEFT JOIN	tbl_Merchants m ON a.MerchantId = m.Id
-	LEFT JOIN	tbl_MerchantLocs ml ON m.Id = ml.MerchantId
 	WHERE		ua.Id = @uaID
+END
+ELSE
+BEGIN
+	SELECT		a.Description AS AchievementDescription,
+				a.RewardName,
+				a.RewardDescription,
+				m.Id AS MerchantId,
+				m.LogoUrl
+	FROM		tbl_Achievements a
+	LEFT JOIN	tbl_Merchants m ON a.MerchantId = m.Id
+	WHERE		a.Id = @aID
+END
 
 END
 GO
