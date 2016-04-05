@@ -1,9 +1,7 @@
-package com.applications.achievementRewards.achievementRewardsAndroid;
+package toDelete;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
+import com.applications.achievementRewards.achievementRewardsAndroid.AchievementDetailsActivity;
+import com.applications.achievementRewards.achievementRewardsAndroid.CompositeRewardActivity;
+import com.applications.achievementRewards.achievementRewardsAndroid.DisplayLocation;
+import com.applications.achievementRewards.achievementRewardsAndroid.NavigationViewActivity;
+import com.applications.achievementRewards.achievementRewardsAndroid.R;
+import com.applications.achievementRewards.achievementRewardsAndroid.SettingsActivity;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUserModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 

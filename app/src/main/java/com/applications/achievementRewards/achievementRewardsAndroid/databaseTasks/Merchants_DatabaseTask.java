@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.MerchantLocModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.MerchantModel;
-import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -13,15 +12,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Adam Feldman on 3/24/2016.
- */
-public class MerchantDetails_DatabaseTask extends AsyncTask<MerchantModel, Integer, MerchantModel> {
+
+public class Merchants_DatabaseTask extends AsyncTask<Integer, Integer, List<MerchantModel>> {
 
     @Override
-    protected MerchantModel doInBackground(MerchantModel... params) {
-        MerchantModel merchantModel = params[0];
+    protected List<MerchantModel> doInBackground(Integer... params) {
+        List<MerchantModel> merchantsModels = new ArrayList<>();
+        //List<MerchantLocModel> merchantsLocsModel = null;
         Connection conn = null;
         PreparedStatement preparedStatement;
 
@@ -31,40 +31,33 @@ public class MerchantDetails_DatabaseTask extends AsyncTask<MerchantModel, Integ
             String ConnectionString = "jdbc:jtds:sqlserver://dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com:1433/achievmentRewardsDB";
             conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
 
-            String queryString = "EXEC getMerchantDetails ?";
+            String queryString = "EXEC getMerchants";
             preparedStatement = conn.prepareStatement(queryString);
-            preparedStatement.setInt(1, merchantModel.getMerchantId());
 
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getResultSet();
 
             while (rs.next()) {
-                merchantModel.setMerchantDescription(rs.getString("MerchantDescription"));
+                MerchantModel merchantModel = new MerchantModel();
+
+                merchantModel.setMerchantId(rs.getInt("MerchantId"));
+                merchantModel.setMerchantName(rs.getString("MerchantName"));
+
+                merchantsModels.add(merchantModel);
             }
 
+            /*
             preparedStatement.getMoreResults();
             rs = preparedStatement.getResultSet();
             while (rs.next()) {
                 MerchantLocModel merchantLocModel = new MerchantLocModel();
 
-                merchantLocModel.setAddress(rs.getString("Address"));
                 merchantLocModel.setLat(rs.getDouble("Lat"));
                 merchantLocModel.setLon(rs.getDouble("Long"));
-                merchantLocModel.setPhoneNum(rs.getInt("PhoneNum"));
-                merchantLocModel.setRad(rs.getDouble("Rad"));
 
-                merchantModel.addMerchantLocModel(merchantLocModel);
+                merchantsLocsModel.add(merchantLocModel);
             }
-
-            preparedStatement.getMoreResults();
-            rs = preparedStatement.getResultSet();
-            while (rs.next()) {
-                UserAchievementModel userAchievementModel = new UserAchievementModel();
-
-                userAchievementModel.setAchievementName(rs.getString("AchievementName"));
-
-                merchantModel.addUserAchievementModel(userAchievementModel);
-            }
+            */
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -75,13 +68,13 @@ public class MerchantDetails_DatabaseTask extends AsyncTask<MerchantModel, Integ
             }
         }
 
-        return merchantModel;
+        return merchantsModels;
     }
 
     @Override
-    protected void onPostExecute(MerchantModel merchantsModel) {
+    protected void onPostExecute(List<MerchantModel> merchantsModels) {
         //super.onPostExecute(currentUsers);
 
-        EventBus.getDefault().post(merchantsModel);
+        EventBus.getDefault().post(merchantsModels);
     }
 }

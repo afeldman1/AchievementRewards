@@ -62,26 +62,35 @@ public class NavigationViewActivity extends Activity {
     }
 
     private void selectItem(int position) {
+        Intent intent;
+
         switch(position) {
             case 0:
                 if (resID == R.layout.activity_home) {
-
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
                 }
-                Intent a = new Intent(this, HomeActivity.class);
-                startActivity(a);
+                intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
                 break;
             case 1:
+                if (resID == R.layout.activity_merchants) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+                }
+                intent = new Intent(this, MerchantsActivity.class);
+                startActivity(intent);
+                break;
+            case 2:
                 if (resID == R.layout.activity_settings)
                 {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
                 }
-                Intent b = new Intent(this, SettingsActivity.class);
-                startActivity(b);
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 break;
-            case 2:
+            case 3:
                 Toast.makeText(this,"Achievement Rewards About Text", Toast.LENGTH_SHORT).show();
                 break;
             default:

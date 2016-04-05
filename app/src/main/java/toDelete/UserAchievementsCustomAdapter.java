@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.applications.achievementRewards.achievementRewardsAndroid.AllRewardsActivity;
+import toDelete.AllRewardsActivity;
 import com.applications.achievementRewards.achievementRewardsAndroid.R;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 

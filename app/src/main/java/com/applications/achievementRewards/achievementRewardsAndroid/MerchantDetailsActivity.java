@@ -1,6 +1,7 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,9 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.MerchantDetails_DatabaseTask;
-//import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.Merchants_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.MerchantModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,12 +27,15 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MerchantDetailsActivity extends NavigationViewActivity {
+public class MerchantDetailsActivity extends NavigationViewActivity implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchant_details);
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         Intent intent = getIntent();
 
@@ -39,6 +47,9 @@ public class MerchantDetailsActivity extends NavigationViewActivity {
 
         TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
         merchantNameTv.setText(merchantModel.getMerchantName());
+
+        TextView merchantAchievementsHeaderTv = (TextView) findViewById(R.id.merchant_achievements_header_tv);
+        merchantAchievementsHeaderTv.setText("More achievements from " + merchantModel.getMerchantName());
     }
 
     @Subscribe
@@ -106,4 +117,14 @@ public class MerchantDetailsActivity extends NavigationViewActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onMapReady(GoogleMap map) {
+        map.moveCamera(CameraUpdateFactory.zoomTo(15));
+        //map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+        LatLng boardwalk = new LatLng(40.74399, -74.03);
+        //map.addMarker(new MarkerOptions().position(boardwalk).title("Boardwalk Fresh Burgers and Fries"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(boardwalk));
+        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+    }
 }
