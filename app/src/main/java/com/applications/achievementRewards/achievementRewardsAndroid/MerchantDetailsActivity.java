@@ -22,7 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MerchantDetailsActivity extends AppCompatActivity {
+public class MerchantDetailsActivity extends NavigationViewActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

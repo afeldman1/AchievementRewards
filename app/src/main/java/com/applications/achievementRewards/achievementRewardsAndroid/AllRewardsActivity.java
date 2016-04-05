@@ -22,7 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllRewardsActivity extends AppCompatActivity {
+public class AllRewardsActivity extends NavigationViewActivity {
     private CurrentUserModel currUser;
 
     //ListView list;

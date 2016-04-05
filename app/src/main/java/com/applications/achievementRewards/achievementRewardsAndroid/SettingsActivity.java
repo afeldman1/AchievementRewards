@@ -16,7 +16,7 @@ import android.app.AlertDialog;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends NavigationViewActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

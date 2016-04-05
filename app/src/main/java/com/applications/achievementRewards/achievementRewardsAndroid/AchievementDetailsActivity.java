@@ -16,7 +16,7 @@ import com.applications.achievementRewards.achievementRewardsAndroid.objects.Use
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class AchievementDetailsActivity extends AppCompatActivity {
+public class AchievementDetailsActivity extends NavigationViewActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
