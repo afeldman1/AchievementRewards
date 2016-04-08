@@ -40,7 +40,6 @@ public class UserAchievementDetails_DatabaseTask extends AsyncTask<UserAchieveme
                     userAchievementModel.setRewardName(rs.getString("RewardName"));
                     userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
                     userAchievementModel.setMerchantId(rs.getInt("MerchantId"));
-                    userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
                 }
             }
             else
@@ -57,7 +56,7 @@ public class UserAchievementDetails_DatabaseTask extends AsyncTask<UserAchieveme
                     userAchievementModel.setRewardName(rs.getString("RewardName"));
                     userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
                     userAchievementModel.setMerchantId(rs.getInt("MerchantId"));
-                    userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
+                    //userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
                 }
             }
         } catch (Exception e) {

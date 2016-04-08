@@ -16,12 +16,11 @@ public class UserAchievementModel implements Parcelable {
     private String rewardDescription;
     private int merchantId;
     private String merchantName;
-    private URL logoUrl;
     private Double progress;
     private Integer trackingMax;
     private Date redeemedAt;
 
-    public UserAchievementModel(Integer userAchievementId, Integer achievementId, String achievementName, String achievementDescription, String rewardName, String rewardDescription, int merchantId, String merchantName, URL logoUrl, double progress, Integer trackingMax, Date redeemedAt) {
+    public UserAchievementModel(Integer userAchievementId, Integer achievementId, String achievementName, String achievementDescription, String rewardName, String rewardDescription, int merchantId, String merchantName, double progress, Integer trackingMax, Date redeemedAt) {
         this.userAchievementId = userAchievementId;
         this.achievementId = achievementId;
         this.achievementName = achievementName;
@@ -30,7 +29,6 @@ public class UserAchievementModel implements Parcelable {
         this.rewardDescription = rewardDescription;
         this.merchantId = merchantId;
         this.merchantName = merchantName;
-        this.logoUrl = logoUrl;
         this.progress = progress;
         this.trackingMax = trackingMax;
         this.redeemedAt = redeemedAt;
@@ -111,14 +109,6 @@ public class UserAchievementModel implements Parcelable {
         this.merchantName = merchantName;
     }
 
-    public URL getLogoUrl() {
-        return logoUrl;
-    }
-
-    public void setLogoUrl(URL logoUrl) {
-        this.logoUrl = logoUrl;
-    }
-
     public Double getProgress() {
         return progress;
     }
@@ -160,7 +150,7 @@ public class UserAchievementModel implements Parcelable {
         pc.writeValue(rewardDescription);
         pc.writeValue(merchantName);
         pc.writeValue(merchantId);
-        pc.writeValue(logoUrl == null ? null : logoUrl.toString());
+        //pc.writeValue(logoUrl == null ? null : logoUrl.toString());
         pc.writeValue(progress);
         pc.writeValue(trackingMax);
         pc.writeValue(redeemedAt == null ? null : redeemedAt.getTime());
@@ -186,12 +176,12 @@ public class UserAchievementModel implements Parcelable {
         this.rewardDescription = (String) pc.readValue(String.class.getClassLoader());
         this.merchantName = (String) pc.readValue(String.class.getClassLoader());
         this.merchantId = (Integer) pc.readValue(Integer.class.getClassLoader());
-        try {
+        /*try {
             String url = (String) pc.readValue(String.class.getClassLoader());
             this.logoUrl = url == null ? null : new URL(url);
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        }
+        }*/
         this.progress = (Double) pc.readValue(Double.class.getClassLoader());
         this.trackingMax = (Integer) pc.readValue(Integer.class.getClassLoader());
         Long t = (Long) pc.readValue(Long.class.getClassLoader());

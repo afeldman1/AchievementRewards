@@ -24,8 +24,7 @@ BEGIN
 				a.Description AS AchievementDescription,
 				a.RewardName,
 				a.RewardDescription,
-				m.Id AS MerchantId,
-				m.LogoUrl
+				m.Id AS MerchantId
 	FROM		tbl_Achievements a 
 	LEFT JOIN	tbl_userAchievements ua ON ua.AchievementId = a.Id
 	LEFT JOIN	tbl_Merchants m ON a.MerchantId = m.Id
@@ -36,8 +35,7 @@ BEGIN
 	SELECT		a.Description AS AchievementDescription,
 				a.RewardName,
 				a.RewardDescription,
-				m.Id AS MerchantId,
-				m.LogoUrl
+				m.Id AS MerchantId
 	FROM		tbl_Achievements a
 	LEFT JOIN	tbl_Merchants m ON a.MerchantId = m.Id
 	WHERE		a.Id = @aID

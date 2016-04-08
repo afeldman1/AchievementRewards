@@ -35,6 +35,7 @@ BEGIN
 	FROM		tbl_Merchants m
 	LEFT JOIN	tbl_Achievements a ON a.MerchantId = m.Id
 	WHERE		m.Id = @mID
+				AND a.isVisible = 1
 
 END
 GO

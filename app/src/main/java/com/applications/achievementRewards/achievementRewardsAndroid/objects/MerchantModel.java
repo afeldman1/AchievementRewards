@@ -1,5 +1,6 @@
 package com.applications.achievementRewards.achievementRewardsAndroid.objects;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ public class MerchantModel {
     private int merchantId;
     private String merchantName;
     private String merchantDescription;
+    private URL logoUrl;
     private List<MerchantLocModel> merchantLocModels = new ArrayList<>();
     private List<UserAchievementModel> userAchievementModels = new ArrayList<>();
 
@@ -32,6 +34,14 @@ public class MerchantModel {
 
     public void setMerchantDescription(String merchantDescription) {
         this.merchantDescription = merchantDescription;
+    }
+
+    public URL getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(URL logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
     public List<MerchantLocModel> getMerchantLocModels() {

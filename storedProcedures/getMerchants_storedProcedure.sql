@@ -17,7 +17,8 @@ BEGIN
 	SET NOCOUNT ON;
 
 	SELECT		m.Id AS MerchantId,
-				m.Name AS MerchantName
+				m.Name AS MerchantName,
+				m.LogoUrl
 	FROM		tbl_Merchants m
 
 	/*
