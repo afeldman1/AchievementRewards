@@ -64,7 +64,7 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userAchievementsLabels);
         ListView merchantAchievementsLv = (ListView) findViewById(R.id.merchant_achievements_lv);
         merchantAchievementsLv.setAdapter(myAdapter);
-        /*
+
         merchantAchievementsLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                           public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                                                               Intent in = new Intent(MerchantDetailsActivity.this, AchievementDetailsActivity.class);
@@ -73,7 +73,7 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
                                                           }
                                                       }
         );
-        */
+
     }
 
     @Override

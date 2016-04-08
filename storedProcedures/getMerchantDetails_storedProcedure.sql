@@ -30,7 +30,8 @@ BEGIN
 	LEFT JOIN	tbl_MerchantLocs ml ON ml.MerchantId = m.Id
 	WHERE		m.Id = @mID
 
-	SELECT		a.Name AS AchievementName
+	SELECT		a.Id AS AchievementId,
+	            a.Name AS AchievementName
 	FROM		tbl_Merchants m
 	LEFT JOIN	tbl_Achievements a ON a.MerchantId = m.Id
 	WHERE		m.Id = @mID

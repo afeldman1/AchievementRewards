@@ -43,7 +43,7 @@ public class HomeActivity extends NavigationViewActivity {
             {
                 onYourWayRewards.add(userAchievementModel);
             }
-            if (userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() == null)
+            if (userAchievementModel.getProgress() == (double)userAchievementModel.getTrackingMax().intValue() && userAchievementModel.getRedeemedAt() == null)
             {
                 achievedAchievements.add(userAchievementModel);
                 achievedAchievementLabels.add(userAchievementModel.getMerchantName() + ": " + userAchievementModel.getAchievementName());

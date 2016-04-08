@@ -61,7 +61,9 @@ public class MerchantDetails_DatabaseTask extends AsyncTask<MerchantModel, Integ
             while (rs.next()) {
                 UserAchievementModel userAchievementModel = new UserAchievementModel();
 
+                userAchievementModel.setAchievementId(rs.getInt("AchievementId"));
                 userAchievementModel.setAchievementName(rs.getString("AchievementName"));
+                userAchievementModel.setMerchantName(merchantModel.getMerchantName());
 
                 merchantModel.addUserAchievementModel(userAchievementModel);
             }

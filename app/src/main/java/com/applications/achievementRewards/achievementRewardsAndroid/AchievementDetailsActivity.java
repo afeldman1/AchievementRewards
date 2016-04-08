@@ -42,29 +42,28 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
             }
         });
 
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        Button redeemBtn = (Button) findViewById(R.id.redeem_btn);
-        TextView redeemedAtTv = (TextView) findViewById(R.id.redeemed_at_tv);
-        if(userAchievementModel.getProgress() != userAchievementModel.getTrackingMax())
-        {
-            redeemBtn.setVisibility(View.GONE);
-            redeemedAtTv.setVisibility(View.GONE);
-            progressBar.setMax(userAchievementModel.getTrackingMax());
-            progressBar.setProgress((int) Math.round(userAchievementModel.getProgress()));
-            progressBar.setVisibility(View.VISIBLE);
-        }
-        else if(userAchievementModel.getProgress() != null && userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() == null)
-        {
-            progressBar.setVisibility(View.GONE);
-            redeemedAtTv.setVisibility(View.GONE);
-            redeemBtn.setVisibility(View.VISIBLE);
-        }
-        else if(userAchievementModel.getProgress() == userAchievementModel.getTrackingMax() && userAchievementModel.getRedeemedAt() != null)
-        {
-            redeemBtn.setVisibility(View.GONE);
-            progressBar.setVisibility(View.GONE);
-            redeemedAtTv.setText("Redeemed on: " + userAchievementModel.getRedeemedAt());
-            redeemedAtTv.setVisibility(View.VISIBLE);
+        if (userAchievementModel.getTrackingMax() != null) {
+            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            Button redeemBtn = (Button) findViewById(R.id.redeem_btn);
+            TextView redeemedAtTv = (TextView) findViewById(R.id.redeemed_at_tv);
+            if (userAchievementModel.getProgress() != (double) userAchievementModel.getTrackingMax().intValue()) {
+                redeemBtn.setVisibility(View.GONE);
+                redeemedAtTv.setVisibility(View.GONE);
+                progressBar.setMax(userAchievementModel.getTrackingMax());
+                progressBar.setProgress((int) Math.round(userAchievementModel.getProgress()));
+                progressBar.setVisibility(View.VISIBLE);
+            }
+            else if (userAchievementModel.getProgress() != null && userAchievementModel.getProgress() == (double) userAchievementModel.getTrackingMax().intValue() && userAchievementModel.getRedeemedAt() == null) {
+                progressBar.setVisibility(View.GONE);
+                redeemedAtTv.setVisibility(View.GONE);
+                redeemBtn.setVisibility(View.VISIBLE);
+            }
+            else if (userAchievementModel.getProgress() == (double) userAchievementModel.getTrackingMax().intValue() && userAchievementModel.getRedeemedAt() != null) {
+                redeemBtn.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                redeemedAtTv.setText("Redeemed on: " + userAchievementModel.getRedeemedAt());
+                redeemedAtTv.setVisibility(View.VISIBLE);
+            }
         }
     }
 

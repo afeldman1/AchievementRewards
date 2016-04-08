@@ -18,10 +18,10 @@ public class UserAchievementModel implements Parcelable {
     private String merchantName;
     private URL logoUrl;
     private Double progress;
-    private int trackingMax;
+    private Integer trackingMax;
     private Date redeemedAt;
 
-    public UserAchievementModel(Integer userAchievementId, Integer achievementId, String achievementName, String achievementDescription, String rewardName, String rewardDescription, int merchantId, String merchantName, URL logoUrl, double progress, int trackingMax, Date redeemedAt) {
+    public UserAchievementModel(Integer userAchievementId, Integer achievementId, String achievementName, String achievementDescription, String rewardName, String rewardDescription, int merchantId, String merchantName, URL logoUrl, double progress, Integer trackingMax, Date redeemedAt) {
         this.userAchievementId = userAchievementId;
         this.achievementId = achievementId;
         this.achievementName = achievementName;
@@ -127,11 +127,11 @@ public class UserAchievementModel implements Parcelable {
         this.progress = progress;
     }
 
-    public int getTrackingMax() {
+    public Integer getTrackingMax() {
         return trackingMax;
     }
 
-    public void setTrackingMax(int trackingMax) {
+    public void setTrackingMax(Integer trackingMax) {
         this.trackingMax = trackingMax;
     }
 
@@ -185,7 +185,7 @@ public class UserAchievementModel implements Parcelable {
         this.rewardName = (String) pc.readValue(String.class.getClassLoader());
         this.rewardDescription = (String) pc.readValue(String.class.getClassLoader());
         this.merchantName = (String) pc.readValue(String.class.getClassLoader());
-        this.merchantId = (int) pc.readValue(Integer.class.getClassLoader());
+        this.merchantId = (Integer) pc.readValue(Integer.class.getClassLoader());
         try {
             String url = (String) pc.readValue(String.class.getClassLoader());
             this.logoUrl = url == null ? null : new URL(url);
@@ -193,7 +193,7 @@ public class UserAchievementModel implements Parcelable {
             e.printStackTrace();
         }
         this.progress = (Double) pc.readValue(Double.class.getClassLoader());
-        this.trackingMax = (int) pc.readValue(Integer.class.getClassLoader());
+        this.trackingMax = (Integer) pc.readValue(Integer.class.getClassLoader());
         Long t = (Long) pc.readValue(Long.class.getClassLoader());
         this.redeemedAt = t == null ? null : new Date(t);
     }

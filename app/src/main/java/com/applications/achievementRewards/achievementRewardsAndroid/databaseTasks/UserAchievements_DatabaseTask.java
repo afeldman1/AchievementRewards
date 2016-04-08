@@ -44,6 +44,9 @@ public class UserAchievements_DatabaseTask extends AsyncTask<Long, Integer, User
                     userAchievementModel.setProgress(null);
                 }
                 userAchievementModel.setTrackingMax(rs.getInt("TrackingMax"));
+                if (rs.wasNull()) {
+                    userAchievementModel.setTrackingMax(null);
+                }
                 userAchievementModel.setRedeemedAt(rs.getDate("RedeemedAt"));
 
                 userAchievementModels.add(userAchievementModel);
