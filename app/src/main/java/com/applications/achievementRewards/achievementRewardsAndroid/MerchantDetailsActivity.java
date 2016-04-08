@@ -1,6 +1,7 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,10 +22,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +61,15 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
     @Subscribe
     public void onDataLoadEvent(final MerchantModel merchantModel) {
         TextView merchantDescriptionTv = (TextView) findViewById(R.id.merchant_description_tv);
+        ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
+
         merchantDescriptionTv.setText(merchantModel.getMerchantDescription());
+
+
+        //String merchantURL = merchantModel.getLogoUrl().toString();
+
+        Picasso.with(this).load("http://ec2-52-23-204-225.compute-1.amazonaws.com/company_logos/Boardwalk.jpg").into(merchantImage);
+
 
         List<String> userAchievementsLabels = new ArrayList<>();
         for (UserAchievementModel userAchievementModel : merchantModel.getUserAchievementModels()) {

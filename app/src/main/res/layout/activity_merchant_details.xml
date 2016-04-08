@@ -16,10 +16,14 @@
         android:id="@+id/merchant_logo_iv"
         android:focusable="false"
         android:src="@mipmap/no_company"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:adjustViewBounds="true"
+        android:layout_marginRight="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
