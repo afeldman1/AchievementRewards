@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.adaptors.Adaptor_Merchants;
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.Merchants_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.MerchantModel;
 
@@ -29,24 +30,18 @@ public class MerchantsActivity extends NavigationViewActivity {
 
     @Subscribe
     public void onDataLoadEvent(final List<MerchantModel> merchantModels) {
-        List<String> merchantModelLabels = new ArrayList<>();
+        ListView merchantsLV = (ListView) findViewById(R.id.merchants_lv);
+        merchantsLV.setAdapter(new Adaptor_Merchants(this, merchantModels));
 
-        for (MerchantModel merchantModel : merchantModels) {
-            merchantModelLabels.add(merchantModel.getMerchantName());
-        }
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, merchantModelLabels);
-        ListView achievedAchievementsLV = (ListView) findViewById(R.id.merchants_lv);
-        achievedAchievementsLV.setAdapter(myAdapter);
-
-        achievedAchievementsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Intent in = new Intent(MerchantsActivity.this, MerchantDetailsActivity.class);
-                in.putExtra("MERCHANTID", merchantModels.get(position).getMerchantId());
-                in.putExtra("MERCHANTNAME", merchantModels.get(position).getMerchantName());
-                startActivity(in);
-            }
-        });
+        merchantsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                               public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                                                   Intent in = new Intent(MerchantsActivity.this, MerchantDetailsActivity.class);
+                                                   in.putExtra("MERCHANTID", merchantModels.get(position).getMerchantId());
+                                                   in.putExtra("MERCHANTNAME", merchantModels.get(position).getMerchantName());
+                                                   startActivity(in);
+                                               }
+                                           }
+        );
     }
 
     @Override

@@ -7,11 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievementDetails_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,14 +35,6 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
 
         TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
         merchantNameTv.setText(userAchievementModel.getMerchantName());
-        merchantNameTv.setOnClickListener(new TextView.OnClickListener() {
-            public void onClick(View v) {
-                Intent in = new Intent(AchievementDetailsActivity.this, MerchantDetailsActivity.class);
-                in.putExtra("MERCHANTID", userAchievementModel.getMerchantId());
-                in.putExtra("MERCHANTNAME", userAchievementModel.getMerchantName());
-                startActivity(in);
-            }
-        });
 
         if (userAchievementModel.getTrackingMax() != null) {
             ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -68,15 +62,28 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
     }
 
     @Subscribe
-    public void onDataLoadEvent(UserAchievementModel userAchievementModel) {
+    public void onDataLoadEvent(final UserAchievementModel userAchievementModel) {
         TextView achievementDescTv = (TextView) findViewById(R.id.achievement_desc_tv);
         achievementDescTv.setText(userAchievementModel.getAchievementDescription());
+
+        TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
+        merchantNameTv.setOnClickListener(new TextView.OnClickListener() {
+            public void onClick(View v) {
+                Intent in = new Intent(AchievementDetailsActivity.this, MerchantDetailsActivity.class);
+                in.putExtra("MERCHANTID", userAchievementModel.getMerchantId());
+                in.putExtra("MERCHANTNAME", userAchievementModel.getMerchantName());
+                startActivity(in);
+            }
+        });
 
         TextView rewardNameTv = (TextView) findViewById(R.id.reward_name_tv);
         rewardNameTv.setText(userAchievementModel.getRewardName());
 
         TextView rewardDescTv = (TextView) findViewById(R.id.reward_desc_tv);
         rewardDescTv.setText(userAchievementModel.getRewardDescription());
+
+        ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
+        Picasso.with(this).load(userAchievementModel.getLogoUrl().toString()).into(merchantImage);
     }
 
     @Override

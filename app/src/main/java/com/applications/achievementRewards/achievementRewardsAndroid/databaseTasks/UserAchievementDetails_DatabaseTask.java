@@ -2,6 +2,7 @@ package com.applications.achievementRewards.achievementRewardsAndroid.databaseTa
 
 import android.os.AsyncTask;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.MerchantModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 
 import org.greenrobot.eventbus.EventBus;
@@ -37,6 +38,7 @@ public class UserAchievementDetails_DatabaseTask extends AsyncTask<UserAchieveme
 
                 while (rs.next()) {
                     userAchievementModel.setAchievementDescription(rs.getString("AchievementDescription"));
+                    userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
                     userAchievementModel.setRewardName(rs.getString("RewardName"));
                     userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
                     userAchievementModel.setMerchantId(rs.getInt("MerchantId"));
@@ -53,10 +55,10 @@ public class UserAchievementDetails_DatabaseTask extends AsyncTask<UserAchieveme
                 while (rs.next()) {
                     userAchievementModel.setAchievementId(rs.getInt("AchievementId"));
                     userAchievementModel.setAchievementDescription(rs.getString("AchievementDescription"));
+                    userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
                     userAchievementModel.setRewardName(rs.getString("RewardName"));
                     userAchievementModel.setRewardDescription(rs.getString("RewardDescription"));
                     userAchievementModel.setMerchantId(rs.getInt("MerchantId"));
-                    //userAchievementModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
                 }
             }
         } catch (Exception e) {

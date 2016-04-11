@@ -32,7 +32,7 @@ public class Adapter_OnWayRewards extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-        return  userAchievementModels.getUserAchievementModels().get(position);
+        return userAchievementModels.getUserAchievementModels().get(position);
     }
 
     @Override
@@ -42,21 +42,23 @@ public class Adapter_OnWayRewards extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View vi = convertView;
-            if (vi == null)
-            vi = inflater.inflate(R.layout.composite_onway_rewards, null);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.composite_onway_rewards, null);
+        }
 
-        TextView merchant_tv = (TextView) vi.findViewById(R.id.merchant_tv);
-        merchant_tv.setText(((UserAchievementModel)getItem(position)).getMerchantName());
+        UserAchievementModel userAchievementModel = (UserAchievementModel) getItem(position);
 
-        TextView achievement_tv = (TextView) vi.findViewById(R.id.achievement_tv);
-        achievement_tv.setText(((UserAchievementModel) getItem(position)).getAchievementName());
+        TextView merchant_tv = (TextView) convertView.findViewById(R.id.merchant_tv);
+        merchant_tv.setText(userAchievementModel.getMerchantName());
 
-        ProgressBar progress_bar = (ProgressBar) vi.findViewById(R.id.progress_bar);
-        progress_bar.setMax(((UserAchievementModel)getItem(position)).getTrackingMax());
-        progress_bar.setProgress((int) Math.round((((UserAchievementModel) getItem(position)).getProgress())));
+        TextView achievement_tv = (TextView) convertView.findViewById(R.id.achievement_tv);
+        achievement_tv.setText(userAchievementModel.getAchievementName());
 
-        return vi;
+        ProgressBar progress_bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
+        progress_bar.setMax(userAchievementModel.getTrackingMax());
+        progress_bar.setProgress((int) Math.round((userAchievementModel.getProgress())));
+
+        return convertView;
     }
 
 }

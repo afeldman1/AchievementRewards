@@ -1,12 +1,18 @@
 package com.applications.achievementRewards.achievementRewardsAndroid.objects;
 
-public class MerchantLocModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MerchantLocModel implements Parcelable {
     private int merchantLocId;
     private double lat;
     private double lon;
     private String address;
     private int phoneNum;
     private double rad;
+
+    public MerchantLocModel() {
+    }
 
     public int getMerchantLocId() {
         return merchantLocId;
@@ -55,4 +61,40 @@ public class MerchantLocModel {
     public void setRad(double rad) {
         this.rad = rad;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(merchantLocId);
+        dest.writeDouble(lat);
+        dest.writeDouble(lon);
+        dest.writeString(address);
+        dest.writeInt(phoneNum);
+        dest.writeDouble(rad);
+    }
+
+    protected MerchantLocModel(Parcel in) {
+        merchantLocId = in.readInt();
+        lat = in.readDouble();
+        lon = in.readDouble();
+        address = in.readString();
+        phoneNum = in.readInt();
+        rad = in.readDouble();
+    }
+
+    public static final Creator<MerchantLocModel> CREATOR = new Creator<MerchantLocModel>() {
+        @Override
+        public MerchantLocModel createFromParcel(Parcel in) {
+            return new MerchantLocModel(in);
+        }
+
+        @Override
+        public MerchantLocModel[] newArray(int size) {
+            return new MerchantLocModel[size];
+        }
+    };
 }

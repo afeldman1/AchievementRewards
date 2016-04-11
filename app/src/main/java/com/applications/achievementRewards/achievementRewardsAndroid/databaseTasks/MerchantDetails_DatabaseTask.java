@@ -8,6 +8,7 @@ import com.applications.achievementRewards.achievementRewardsAndroid.objects.Use
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,6 +41,7 @@ public class MerchantDetails_DatabaseTask extends AsyncTask<MerchantModel, Integ
 
             while (rs.next()) {
                 merchantModel.setMerchantDescription(rs.getString("MerchantDescription"));
+                merchantModel.setLogoUrl(rs.getString("LogoUrl") == null ? null : new URL(rs.getString("LogoUrl")));
             }
 
             preparedStatement.getMoreResults();

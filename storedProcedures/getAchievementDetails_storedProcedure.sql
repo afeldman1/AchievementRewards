@@ -22,6 +22,7 @@ IF @uaID IS NOT NULL
 BEGIN
 	SELECT		a.Id AS AchievementId,
 				a.Description AS AchievementDescription,
+				m.LogoUrl,
 				a.RewardName,
 				a.RewardDescription,
 				m.Id AS MerchantId
@@ -33,6 +34,7 @@ END
 ELSE
 BEGIN
 	SELECT		a.Description AS AchievementDescription,
+				m.LogoUrl,
 				a.RewardName,
 				a.RewardDescription,
 				m.Id AS MerchantId

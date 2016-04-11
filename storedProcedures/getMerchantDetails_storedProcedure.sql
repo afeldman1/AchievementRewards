@@ -17,7 +17,8 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	SELECT		m.Description AS MerchantDescription
+	SELECT		m.Description AS MerchantDescription,
+				m.LogoUrl
 	FROM		tbl_Merchants m
 	WHERE		m.Id = @mID
 

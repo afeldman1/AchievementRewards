@@ -61,15 +61,10 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
     @Subscribe
     public void onDataLoadEvent(final MerchantModel merchantModel) {
         TextView merchantDescriptionTv = (TextView) findViewById(R.id.merchant_description_tv);
-        ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
-
         merchantDescriptionTv.setText(merchantModel.getMerchantDescription());
 
-
-        //String merchantURL = merchantModel.getLogoUrl().toString();
-
-        Picasso.with(this).load("http://ec2-52-23-204-225.compute-1.amazonaws.com/company_logos/Boardwalk.jpg").into(merchantImage);
-
+        ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
+        Picasso.with(this).load(merchantModel.getLogoUrl().toString()).into(merchantImage);
 
         List<String> userAchievementsLabels = new ArrayList<>();
         for (UserAchievementModel userAchievementModel : merchantModel.getUserAchievementModels()) {
@@ -87,7 +82,6 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
                                                           }
                                                       }
         );
-
     }
 
     @Override
