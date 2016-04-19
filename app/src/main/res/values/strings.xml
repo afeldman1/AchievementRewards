@@ -13,6 +13,7 @@
     <string name="network_enabled">Network location settings are currently enabled on this device. Leaving them enabled can save battery when tracking location.</string>
     <string name="open_location_settings">Location Settings</string>
     <string name="Cancel">Cancel</string>
+    <string name="Loading">Loading</string>
     <string name="title_activity_display_location">Map</string>
     <string-array
         name="nav_list_strings">
@@ -21,4 +22,10 @@
         <item>Settings</item>
         <item>About</item>
     </string-array>
+    <array name="nav_drawer_icons">
+        <item>@mipmap/home</item>
+        <item>@mipmap/merchants</item>
+        <item>@mipmap/settings</item>
+        <item>@mipmap/about</item>
+    </array>
 </resources>

@@ -1,20 +1,29 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.applications.achievementRewards.achievementRewardsAndroid.adaptors.NavDrawerAdapter;
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.NavDrawerItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.Map;
 
@@ -23,23 +32,71 @@ public class NavigationViewActivity extends Activity {
 
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
-    ListView navBar;
+
+    ListView listView;
+
+
     int resID;
+    String[] navTitles;
+    int icons[] = {R.mipmap.home, R.mipmap.merchants, R.mipmap.settings, R.mipmap.about};
+    String userName = "username";
+    int profilePicture = 1;
+
+    NavDrawerItem[] navDrawerItems = new NavDrawerItem[icons.length];
+
 
     @Override
     public void setContentView(final int layoutResID) {
         // Your base layout here
-
         super.setContentView(R.layout.activity_navigation_view);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         frameLayout = (FrameLayout) findViewById(R.id.content_frame);
-        navBar = (ListView) findViewById(R.id.left_drawer);
+        listView = (ListView) findViewById(R.id.left_drawer);
+
+        navTitles = getResources().getStringArray(R.array.nav_list_strings);
+
+        for (int i = 0; i < navTitles.length; i++)
+        {
+            navDrawerItems[i] = new NavDrawerItem(icons[i], navTitles[i]);
+        }
+
+        //user ID
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        long userID = sharedPreferences.getLong("currUserID", 0);
+        Map names = sharedPreferences.getAll();
+
+        String lastName = (String)names.get("LastName");
+        String firstName = (String)names.get("FirstName");
+
+        String full_name = firstName + " " + lastName;
+        userName = full_name;
 
 
-        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.nav_list_strings));
-        navBar.setAdapter(aa);
-        navBar.setOnItemClickListener(new DrawerItemClickListener());
+
+
+
+
+
+
+        LayoutInflater inflater = getLayoutInflater();
+        ViewGroup mTop = (ViewGroup)inflater.inflate(R.layout.nav_header, null);
+
+        listView.addHeaderView(mTop, null, false);
+
+        TextView fb_name = (TextView) listView.findViewById (R.id.FB_name);
+        fb_name.setText(userName);
+
+
+        String prof_url = "https://graph.facebook.com/" + String.valueOf(userID)+ "/picture?type=large";
+        ImageView profile_pic = (ImageView) listView.findViewById(R.id.profile_image);
+
+        Picasso.with(this).load(prof_url).into(profile_pic);
+
+        listView.setAdapter(new NavDrawerAdapter(this, R.layout.nav_view_item, navDrawerItems));
+
+        listView.setOnItemClickListener(new DrawerItemClickListener());
+
 
 
         // Setting the content of layout your provided to the act_content frame
@@ -54,7 +111,8 @@ public class NavigationViewActivity extends Activity {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                 long arg3) {
-            selectItem(arg2);
+            //add 1 since now we have a header
+            selectItem(arg2-1);
             // TODO Auto-generated method stub
 
         }
