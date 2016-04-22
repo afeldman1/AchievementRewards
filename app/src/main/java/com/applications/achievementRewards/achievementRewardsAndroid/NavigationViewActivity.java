@@ -41,7 +41,7 @@ public class NavigationViewActivity extends Activity {
 
     int resID;
     String[] navTitles;
-    int icons[] = {R.mipmap.home, R.mipmap.merchants, R.mipmap.settings, R.mipmap.about};
+    int icons[] = {R.mipmap.home, R.mipmap.merchants, R.mipmap.settings, R.mipmap.settings};
     String userName = "username";
     int profilePicture = 1;
 

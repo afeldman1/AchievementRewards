@@ -27,6 +27,6 @@
         <item>@mipmap/home</item>
         <item>@mipmap/merchants</item>
         <item>@mipmap/settings</item>
-        <item>@mipmap/about</item>
+       <!-- <item>@mipmap/about</item>!-->
     </array>
 </resources>

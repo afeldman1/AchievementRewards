@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.MerchantDetails_DatabaseTask;
+import com.applications.achievementRewards.achievementRewardsAndroid.objects.MerchantLocModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.MerchantModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,6 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MerchantDetailsActivity extends NavigationViewActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
+    private List<Double> longs = new ArrayList<>();
+    private List<Double> lats = new ArrayList<>();
+    private boolean location = false;
+    private List<String> addresses = new ArrayList<>();
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,8 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
         TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
         merchantNameTv.setText(merchantModel.getMerchantName());
 
+        title = merchantModel.getMerchantName();
+
         TextView merchantAchievementsHeaderTv = (TextView) findViewById(R.id.merchant_achievements_header_tv);
         merchantAchievementsHeaderTv.setText("More achievements from " + merchantModel.getMerchantName());
     }
@@ -70,6 +81,16 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
         for (UserAchievementModel userAchievementModel : merchantModel.getUserAchievementModels()) {
             userAchievementsLabels.add(userAchievementModel.getAchievementName());
         }
+
+
+        for (MerchantLocModel merchantLocModel : merchantModel.getMerchantLocModels()) {
+            longs.add(merchantLocModel.getLon());
+            lats.add(merchantLocModel.getLat());
+            addresses.add(merchantLocModel.getAddress());
+        }
+
+        location = true;
+
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userAchievementsLabels);
         ListView merchantAchievementsLv = (ListView) findViewById(R.id.merchant_achievements_lv);
         merchantAchievementsLv.setAdapter(myAdapter);
@@ -127,12 +148,33 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
 
     @Override
     public void onMapReady(GoogleMap map) {
-        map.moveCamera(CameraUpdateFactory.zoomTo(15));
-        //map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap = map;
 
-        LatLng boardwalk = new LatLng(40.74399, -74.03);
-        //map.addMarker(new MarkerOptions().position(boardwalk).title("Boardwalk Fresh Burgers and Fries"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(boardwalk));
-        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        int count = 0;
+
+        //MAYBE WAIT HERE FOR A SECOND?
+
+        for (int i = 0; i < lats.size(); ++i) {
+            if (lats.get(i) != null && lats.get(i) != 0 && longs.get(i) != null && longs.get(i) != 0) {
+                LatLng position = new LatLng(lats.get(i),longs.get(i));
+                if (addresses.get(i) != null && addresses.get(i) != ""){
+                    mMap.addMarker(new MarkerOptions().position(position).title(addresses.get(i)));
+                } else {
+                    mMap.addMarker(new MarkerOptions().position(position).title(title));
+                }
+                if (count == 0) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+                }
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            LatLng position = new LatLng(40.744337, -74.025749);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+        }
+
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(17));
     }
 }
