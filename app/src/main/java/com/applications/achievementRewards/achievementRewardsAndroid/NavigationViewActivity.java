@@ -2,12 +2,14 @@ package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 public class NavigationViewActivity extends Activity {
 
+    Toolbar toolbar;
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
 
@@ -42,13 +45,15 @@ public class NavigationViewActivity extends Activity {
     String userName = "username";
     int profilePicture = 1;
 
-    NavDrawerItem[] navDrawerItems = new NavDrawerItem[icons.length];
 
+    NavDrawerItem[] navDrawerItems = new NavDrawerItem[icons.length];
 
     @Override
     public void setContentView(final int layoutResID) {
         // Your base layout here
         super.setContentView(R.layout.activity_navigation_view);
+
+        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         frameLayout = (FrameLayout) findViewById(R.id.content_frame);
