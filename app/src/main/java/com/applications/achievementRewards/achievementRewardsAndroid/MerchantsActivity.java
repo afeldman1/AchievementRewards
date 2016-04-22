@@ -1,11 +1,12 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.adaptors.Adaptor_Merchants;
@@ -15,7 +16,6 @@ import com.applications.achievementRewards.achievementRewardsAndroid.objects.Mer
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MerchantsActivity extends NavigationViewActivity {
@@ -31,7 +31,8 @@ public class MerchantsActivity extends NavigationViewActivity {
     @Subscribe
     public void onDataLoadEvent(final List<MerchantModel> merchantModels) {
         ListView merchantsLV = (ListView) findViewById(R.id.merchants_lv);
-        merchantsLV.setAdapter(new Adaptor_Merchants(this, merchantModels));
+        final Adaptor_Merchants adaptorMerchants = new Adaptor_Merchants(this, merchantModels);
+        merchantsLV.setAdapter(adaptorMerchants);
 
         merchantsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -42,6 +43,20 @@ public class MerchantsActivity extends NavigationViewActivity {
                                                }
                                            }
         );
+
+        EditText filterET = (EditText) findViewById(R.id.filter_et);
+        filterET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adaptorMerchants.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
     }
 
     @Override
