@@ -51,6 +51,11 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
                 progressBar.setVisibility(View.GONE);
                 redeemedAtTv.setVisibility(View.GONE);
                 redeemBtn.setVisibility(View.VISIBLE);
+                redeemBtn.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+
+                    }
+                });
             }
             else if (userAchievementModel.getProgress() == (double) userAchievementModel.getTrackingMax().intValue() && userAchievementModel.getRedeemedAt() != null) {
                 redeemBtn.setVisibility(View.GONE);
@@ -96,34 +101,5 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.action_test) {
-            Intent intent = new Intent(this, DisplayLocation.class);
-            startActivity(intent);
-            return true;
-        }
-
-
-        return super.onOptionsItemSelected(item);
     }
 }
