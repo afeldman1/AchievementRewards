@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.LocationTracking;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.CurrentUserModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.HomeActivity;
 
@@ -142,6 +143,9 @@ public class Users_DatabaseTask extends AsyncTask<CurrentUserModel, Integer, Cur
         editor.putString("Email", currentUsersModel.getEmail());
 
         editor.commit();
+
+        Intent serviceIntent = new Intent(myFragmentActivity, LocationTracking.class);
+        myFragmentActivity.startService(serviceIntent);
 
         Intent intent = new Intent(myFragmentActivity, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
