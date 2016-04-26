@@ -88,7 +88,6 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
 
         ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
         Picasso.with(this).load(userAchievementModel.getLogoUrl().toString()).into(merchantImage);
-        super.setToolbarImage(userAchievementModel.getLogoUrl().toString());
     }
 
     @Subscribe

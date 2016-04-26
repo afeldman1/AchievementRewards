@@ -60,8 +60,6 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
 
         new MerchantDetails_DatabaseTask().execute(merchantModel);
 
-        TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
-        merchantNameTv.setText(merchantModel.getMerchantName());
         super.setHeaderText(merchantModel.getMerchantName());
 
         title = merchantModel.getMerchantName();

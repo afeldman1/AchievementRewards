@@ -24,19 +24,20 @@
         android:maxWidth="50dp"
         android:adjustViewBounds="true"
         android:layout_marginRight="5dp"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Merchant Name"
-        android:id="@+id/merchant_name_tv"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Merchant Description"
+        android:id="@+id/merchant_description_tv"
         android:focusable="false"
-        android:layout_alignTop="@+id/merchant_logo_iv"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/merchant_logo_iv"
         android:layout_toRightOf="@+id/merchant_logo_iv"
-        android:layout_toEndOf="@+id/merchant_logo_iv" />
+        android:layout_toEndOf="@+id/merchant_logo_iv"
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,21 +68,6 @@ tools:context=".MapsActivity"
 xmlns:tools="http://schemas.android.com/tools"
 !-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Merchant Description"
-        android:id="@+id/merchant_description_tv"
-        android:layout_marginTop="10dp"
-        android:focusable="false"
-        android:gravity="center"
-        android:layout_below="@+id/map"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,7 +76,7 @@ xmlns:tools="http://schemas.android.com/tools"
         android:text="More achievements from this merchant"
         android:id="@+id/merchant_achievements_header_tv"
         android:focusable="false"
-        android:layout_below="@+id/merchant_description_tv"
+        android:layout_below="@id/map"
         android:layout_marginTop="5pt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

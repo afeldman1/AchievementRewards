@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
@@ -233,11 +234,6 @@ public class NavigationViewActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(headerText);
     }
 
-    public void setToolbarImage(String imageURL)
-    {
-
-
-    }
 }
 
 
