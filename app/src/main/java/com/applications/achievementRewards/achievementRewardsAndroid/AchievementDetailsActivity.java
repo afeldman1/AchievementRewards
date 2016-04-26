@@ -1,22 +1,22 @@
 package com.applications.achievementRewards.achievementRewardsAndroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.RedeemUserAchievement_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievementDetails_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.Date;
 
 public class AchievementDetailsActivity extends NavigationViewActivity {
 
@@ -53,7 +53,7 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
                 redeemBtn.setVisibility(View.VISIBLE);
                 redeemBtn.setOnClickListener(new Button.OnClickListener() {
                     public void onClick(View v) {
-
+                        new RedeemUserAchievement_DatabaseTask().execute(userAchievementModel.getUserAchievementId());
                     }
                 });
             }
@@ -89,6 +89,18 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
 
         ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
         Picasso.with(this).load(userAchievementModel.getLogoUrl().toString()).into(merchantImage);
+    }
+
+    @Subscribe
+    public void onUserAchievementRedeemedEvent(Date redeemedAt) {
+        if (redeemedAt != null) {
+            Button redeemBtn = (Button) findViewById(R.id.redeem_btn);
+            redeemBtn.setVisibility(View.GONE);
+
+            TextView redeemedAtTv = (TextView) findViewById(R.id.redeemed_at_tv);
+            redeemedAtTv.setText("Redeemed on: " + redeemedAt);
+            redeemedAtTv.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
