@@ -22,6 +22,7 @@ public class SettingsActivity extends NavigationViewActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        super.setHeaderText("Settings");
     }
 
     @Override

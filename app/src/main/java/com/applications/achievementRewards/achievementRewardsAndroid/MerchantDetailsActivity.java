@@ -62,6 +62,7 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
 
         TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
         merchantNameTv.setText(merchantModel.getMerchantName());
+        super.setHeaderText(merchantModel.getMerchantName());
 
         title = merchantModel.getMerchantName();
 
@@ -76,6 +77,8 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
 
         ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
         Picasso.with(this).load(merchantModel.getLogoUrl().toString()).into(merchantImage);
+
+
 
         List<String> userAchievementsLabels = new ArrayList<>();
         for (UserAchievementModel userAchievementModel : merchantModel.getUserAchievementModels()) {

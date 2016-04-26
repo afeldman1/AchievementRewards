@@ -3,6 +3,7 @@ package com.applications.achievementRewards.achievementRewardsAndroid;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
@@ -205,10 +206,11 @@ public class NavigationViewActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -224,6 +226,17 @@ public class NavigationViewActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setHeaderText(String headerText)
+    {
+        getSupportActionBar().setTitle(headerText);
+    }
+
+    public void setToolbarImage(String imageURL)
+    {
+
+
     }
 }
 

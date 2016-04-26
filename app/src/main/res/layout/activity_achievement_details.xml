@@ -28,29 +28,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Achievement Name"
-        android:id="@+id/achievement_name_tv"
-        android:focusable="false"
-        android:layout_alignTop="@+id/merchant_logo_iv"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/merchant_logo_iv"
-        android:layout_toEndOf="@+id/merchant_logo_iv" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Merchant Name"
         android:id="@+id/merchant_name_tv"
         android:focusable="false"
-        android:layout_marginTop="4pt"
-        android:layout_alignBottom="@+id/merchant_logo_iv"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/merchant_logo_iv"
-        android:layout_toEndOf="@+id/merchant_logo_iv" />
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/achievement_desc_tv"
+        android:layout_alignStart="@+id/achievement_desc_tv" />
 
     <TextView
         android:layout_width="wrap_content"

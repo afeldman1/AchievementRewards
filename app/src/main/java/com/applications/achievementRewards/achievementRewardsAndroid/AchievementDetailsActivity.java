@@ -30,8 +30,7 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
 
         new UserAchievementDetails_DatabaseTask().execute(userAchievementModel);
 
-        TextView achievementNameTv = (TextView) findViewById(R.id.achievement_name_tv);
-        achievementNameTv.setText(userAchievementModel.getAchievementName());
+        super.setHeaderText(userAchievementModel.getAchievementName());
 
         TextView merchantNameTv = (TextView) findViewById(R.id.merchant_name_tv);
         merchantNameTv.setText(userAchievementModel.getMerchantName());
@@ -89,6 +88,7 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
 
         ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
         Picasso.with(this).load(userAchievementModel.getLogoUrl().toString()).into(merchantImage);
+        super.setToolbarImage(userAchievementModel.getLogoUrl().toString());
     }
 
     @Subscribe

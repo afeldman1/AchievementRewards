@@ -154,15 +154,15 @@ public class AllRewardsActivity extends NavigationViewActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.action_test) {
-            Intent intent = new Intent(this, DisplayLocation.class);
-            startActivity(intent);
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+        //    Intent intent = new Intent(this, SettingsActivity.class);
+        //    startActivity(intent);
+        //    return true;
+        //} else if (id == R.id.action_test) {
+        //    Intent intent = new Intent(this, DisplayLocation.class);
+        //    startActivity(intent);
+        //    return true;
+        //}
 
 
         return super.onOptionsItemSelected(item);
