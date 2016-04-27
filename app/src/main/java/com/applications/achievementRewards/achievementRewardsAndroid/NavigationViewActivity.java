@@ -64,6 +64,7 @@ public class NavigationViewActivity extends AppCompatActivity {
 
         //toolbar code
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        toolbar.setTitleTextColor(0xFFFFFFFF);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
