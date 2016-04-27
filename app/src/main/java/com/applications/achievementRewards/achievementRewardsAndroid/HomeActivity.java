@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.adaptors.Adapter_OnWayRewards;
@@ -69,20 +70,28 @@ public class HomeActivity extends NavigationViewActivity {
                                              }
         );
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, achievedAchievementLabels);
         ListView achievedAchievementsLV = (ListView) findViewById(R.id.avail_list);
-        achievedAchievementsLV.setAdapter(myAdapter);
+        if (achievedAchievementLabels.size() > 0) {
+            ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, achievedAchievementLabels);
+            achievedAchievementsLV.setAdapter(myAdapter);
 
-        achievedAchievementsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                                          public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                                                              Intent in = new Intent(HomeActivity.this, AchievementDetailsActivity.class);
-                                                              in.putExtra("USERACHIEVEMENTMODEL", achievedAchievements.getUserAchievementModel(position));
-                                                              //i.putExtra("TEXT", text);
-                                                              //i.putExtra("IMAGE", img); // <-- Assumed you image is Parcelable
-                                                              startActivity(in);
+            achievedAchievementsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                              public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                                                                  Intent in = new Intent(HomeActivity.this, AchievementDetailsActivity.class);
+                                                                  in.putExtra("USERACHIEVEMENTMODEL", achievedAchievements.getUserAchievementModel(position));
+                                                                  //i.putExtra("TEXT", text);
+                                                                  //i.putExtra("IMAGE", img); // <-- Assumed you image is Parcelable
+                                                                  startActivity(in);
+                                                              }
                                                           }
-                                                      }
-        );
+            );
+        }
+        else {
+            achievedAchievementsLV.setVisibility(View.GONE);
+
+            TextView achievedAchievementsTV = (TextView) findViewById(R.id.avail_text);
+            achievedAchievementsTV.setVisibility(View.GONE);
+        }
     }
 
     @Override

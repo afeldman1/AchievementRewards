@@ -55,9 +55,12 @@ public class Adaptor_Merchants extends BaseAdapter implements Filterable {
 
         MerchantModel merchantModel = (MerchantModel) getItem(position);
 
+        ImageView merchant_logo_iv = (ImageView) convertView.findViewById(R.id.merchant_logo_iv);
         if (merchantModel.getLogoUrl() != null) {
-            ImageView merchant_logo_iv = (ImageView) convertView.findViewById(R.id.merchant_logo_iv);
             Picasso.with(context).load(merchantModel.getLogoUrl().toString()).into(merchant_logo_iv);
+        }
+        else {
+            merchant_logo_iv.setImageResource(R.mipmap.no_company);
         }
 
         TextView merchant_tv = (TextView) convertView.findViewById(R.id.merchant_tv);

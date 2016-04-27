@@ -24,6 +24,7 @@ public class MerchantsActivity extends NavigationViewActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchants);
+        super.setHeaderText("All Merchants");
 
         new Merchants_DatabaseTask().execute();
     }
