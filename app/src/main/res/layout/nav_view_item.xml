@@ -5,11 +5,11 @@
     android:orientation="horizontal"
     android:background="@color/LightGray">
     <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
         android:paddingLeft="8dp"
         android:id="@+id/nav_image"
-        android:background="@android:color/transparent">
+        android:background="@null">
 
     </ImageView>
     <TextView
