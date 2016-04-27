@@ -20,6 +20,7 @@
         name="nav_list_strings">
         <item>Home</item>
         <item>Merchants</item>
+        <item>History</item>
         <item>Settings</item>
         <item>About</item>
     </string-array>

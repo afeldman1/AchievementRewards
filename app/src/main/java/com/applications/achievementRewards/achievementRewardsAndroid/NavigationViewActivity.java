@@ -45,13 +45,12 @@ public class NavigationViewActivity extends AppCompatActivity {
     //list of items for navigation view
     ListView listView;
     String[] navTitles;
-    int icons[] = {R.mipmap.home, R.mipmap.merchants, R.mipmap.settings, R.mipmap.about};
+    int icons[] = {R.mipmap.home, R.mipmap.merchants, R.mipmap.checkmark, R.mipmap.settings, R.mipmap.about};
     NavDrawerItem[] navDrawerItems = new NavDrawerItem[icons.length];
 
     //user values
     int resID;
     String userName = "username";
-    int profilePicture = 1;
 
     //action bar toggle
     private ActionBarDrawerToggle mDrawerToggle;
@@ -87,12 +86,7 @@ public class NavigationViewActivity extends AppCompatActivity {
         long userID = sharedPreferences.getLong("currUserID", 0);
         Map names = sharedPreferences.getAll();
 
-        String lastName = (String) names.get("LastName");
-        String firstName = (String) names.get("FirstName");
-
-        String full_name = firstName + " " + lastName;
-        userName = full_name;
-
+        userName = names.get("FirstName") + " " + names.get("LastName");
 
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup mTop = (ViewGroup) inflater.inflate(R.layout.nav_header, null);
@@ -101,7 +95,6 @@ public class NavigationViewActivity extends AppCompatActivity {
 
         TextView fb_name = (TextView) listView.findViewById(R.id.FB_name);
         fb_name.setText(userName);
-
 
         String prof_url = "https://graph.facebook.com/" + String.valueOf(userID) + "/picture?type=large";
         ImageView profile_pic = (ImageView) listView.findViewById(R.id.profile_image);
@@ -117,10 +110,7 @@ public class NavigationViewActivity extends AppCompatActivity {
         // Setting the content of layout your provided to the act_content frame
         getLayoutInflater().inflate(layoutResID, frameLayout, true);
         resID = layoutResID;
-
-
     }
-
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
@@ -132,7 +122,6 @@ public class NavigationViewActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
 
         }
-
     }
 
     private void selectItem(int position) {
@@ -158,6 +147,15 @@ public class NavigationViewActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case 2:
+                if (resID == R.layout.activity_achievement_history) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                intent = new Intent(this, AchievementHistoryActivity.class);
+                startActivity(intent);
+                break;
+            case 3:
                 if (resID == R.layout.activity_settings) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
@@ -166,8 +164,8 @@ public class NavigationViewActivity extends AppCompatActivity {
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 break;
-            case 3:
-                Toast.makeText(this, "Achievement Rewards About Text", Toast.LENGTH_SHORT).show();
+            case 4:
+                Toast.makeText(this, "Achievement Rewards\nAdam Taranov\nMike Kovalski\nRandall Suliga", Toast.LENGTH_SHORT).show();
                 break;
             default:
         }

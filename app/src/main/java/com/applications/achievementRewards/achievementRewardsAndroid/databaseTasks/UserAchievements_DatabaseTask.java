@@ -28,12 +28,12 @@ public class UserAchievements_DatabaseTask extends AsyncTask<Long, Integer, User
             conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
 
             if(params.length > 1 && params[1] == 1) {
-                String queryString = "EXEC getUserAchievements ?";
+                String queryString = "EXEC getUserAchievements @currID=?, @getRedeemed=1";
                 preparedStatement = conn.prepareStatement(queryString);
                 preparedStatement.setLong(1, params[0]);
             }
             else {
-                String queryString = "EXEC getUserAchievements ?";
+                String queryString = "EXEC getUserAchievements @currID=?, @getRedeemed=0";
                 preparedStatement = conn.prepareStatement(queryString);
                 preparedStatement.setLong(1, params[0]);
             }
@@ -54,7 +54,7 @@ public class UserAchievements_DatabaseTask extends AsyncTask<Long, Integer, User
                 if (rs.wasNull()) {
                     userAchievementModel.setTrackingMax(null);
                 }
-                userAchievementModel.setRedeemedAt(rs.getDate("RedeemedAt"));
+                userAchievementModel.setRedeemedAt(rs.getTimestamp("RedeemedAt"));
 
                 userAchievementModels.add(userAchievementModel);
             }

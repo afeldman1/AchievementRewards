@@ -8,14 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@android:style/TextAppearance.Medium"
-        android:id="@+id/merchant_tv"
-        android:text="Filler Text for Merchant to Overwrite" />
+        android:id="@+id/achievement_tv" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@android:style/TextAppearance.Small"
-        android:id="@+id/achievement_tv"
-        android:text="Filler Text for Achievement Name to Overwrite" />
+        android:id="@+id/merchant_tv" />
     <ProgressBar
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"

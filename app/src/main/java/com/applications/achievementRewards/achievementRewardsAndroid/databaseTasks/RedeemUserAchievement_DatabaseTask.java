@@ -32,7 +32,7 @@ public class RedeemUserAchievement_DatabaseTask extends AsyncTask<Integer, Integ
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                redeemedAt = rs.getDate("RedeemedAt");
+                redeemedAt = rs.getTimestamp("RedeemedAt");
             }
         } catch (Exception e) {
             e.printStackTrace();

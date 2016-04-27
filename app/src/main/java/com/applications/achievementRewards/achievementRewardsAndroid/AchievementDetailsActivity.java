@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 public class AchievementDetailsActivity extends NavigationViewActivity {
@@ -59,7 +60,9 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
             else if (userAchievementModel.getProgress() == (double) userAchievementModel.getTrackingMax().intValue() && userAchievementModel.getRedeemedAt() != null) {
                 redeemBtn.setVisibility(View.GONE);
                 progressBar.setVisibility(View.GONE);
-                redeemedAtTv.setText("Redeemed on: " + userAchievementModel.getRedeemedAt());
+                DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+                DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getApplicationContext());
+                redeemedAtTv.setText("Redeemed on: " + dateFormat.format(userAchievementModel.getRedeemedAt()) + " " + timeFormat.format(userAchievementModel.getRedeemedAt()));
                 redeemedAtTv.setVisibility(View.VISIBLE);
             }
         }
@@ -96,8 +99,11 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
             Button redeemBtn = (Button) findViewById(R.id.redeem_btn);
             redeemBtn.setVisibility(View.GONE);
 
+            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+            DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getApplicationContext());
+
             TextView redeemedAtTv = (TextView) findViewById(R.id.redeemed_at_tv);
-            redeemedAtTv.setText("Redeemed on: " + redeemedAt);
+            redeemedAtTv.setText("Redeemed on: " + dateFormat.format(redeemedAt) + " " + timeFormat.format(redeemedAt));
             redeemedAtTv.setVisibility(View.VISIBLE);
         }
     }
