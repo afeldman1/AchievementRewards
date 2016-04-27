@@ -14,6 +14,10 @@
     <string name="open_location_settings">Location Settings</string>
     <string name="Cancel">Cancel</string>
     <string name="Loading">Loading</string>
+    <string name="redeem">Redeem</string>
+    <string name="redeemed">Redeemed</string>
+    <string name="redeemedOn">Redeemed on: </string>
+    <string name="moreMerchant">More achievements from this merchant</string>
     <string name="title_activity_display_location">Map</string>
     <string name="search">search</string>
     <string-array
