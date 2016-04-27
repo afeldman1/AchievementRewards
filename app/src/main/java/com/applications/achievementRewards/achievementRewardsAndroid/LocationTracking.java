@@ -10,7 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.applications.achievementRewards.achievementRewardsAndroid.adaptors.Adapter_OnWayRewards;
+import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UpdateProgress_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.databaseTasks.UserAchievements_DatabaseTask;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.UserAchievementModel;
 import com.applications.achievementRewards.achievementRewardsAndroid.objects.wrapper.UserAchievementModels;
@@ -23,11 +23,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 
 import org.greenrobot.eventbus.Subscribe;
-
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class LocationTracking extends Service implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
@@ -51,9 +46,8 @@ public class LocationTracking extends Service implements
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-
-
     public LocationTracking() {
+
     }
 
     @Override
@@ -92,8 +86,6 @@ public class LocationTracking extends Service implements
 
     @Override
     public void onDestroy() {
-
-
         stopLocationUpdates();
         mGoogleApiClient.disconnect();
         super.onDestroy();
@@ -101,9 +93,7 @@ public class LocationTracking extends Service implements
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
         startLocationUpdates();
-
     }
 
     protected void startLocationUpdates() {
@@ -156,7 +146,7 @@ public class LocationTracking extends Service implements
                 }
             }
             total_distance = 0;
-
+            //new UpdateProgress_DatabaseTask().execute(userAchievementModels);
         }
     }
 }

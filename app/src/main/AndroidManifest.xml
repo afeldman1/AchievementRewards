@@ -36,6 +36,7 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".AchievementDetailsActivity" />
         <activity android:name=".MerchantDetailsActivity" />
+        <activity android:name=".AchievementHistoryActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

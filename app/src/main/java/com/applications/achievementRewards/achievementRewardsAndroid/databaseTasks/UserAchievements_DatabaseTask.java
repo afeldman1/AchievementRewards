@@ -27,9 +27,16 @@ public class UserAchievements_DatabaseTask extends AsyncTask<Long, Integer, User
             String ConnectionString = "jdbc:jtds:sqlserver://dbinstance.clj6bmyeizyc.us-east-1.rds.amazonaws.com:1433/achievmentRewardsDB";
             conn = DriverManager.getConnection(ConnectionString, "awsUser", "awsPassword");
 
-            String queryString = "EXEC getUserAchievements ?";
-            preparedStatement = conn.prepareStatement(queryString);
-            preparedStatement.setLong(1, params[0]);
+            if(params.length > 1 && params[1] == 1) {
+                String queryString = "EXEC getUserAchievements ?";
+                preparedStatement = conn.prepareStatement(queryString);
+                preparedStatement.setLong(1, params[0]);
+            }
+            else {
+                String queryString = "EXEC getUserAchievements ?";
+                preparedStatement = conn.prepareStatement(queryString);
+                preparedStatement.setLong(1, params[0]);
+            }
 
             ResultSet rs = preparedStatement.executeQuery();
 

@@ -29,7 +29,6 @@ public class HomeActivity extends NavigationViewActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         super.setHeaderText("Home");
-
     }
 
     @Override

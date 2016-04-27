@@ -73,16 +73,15 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
         TextView merchantDescriptionTv = (TextView) findViewById(R.id.merchant_description_tv);
         merchantDescriptionTv.setText(merchantModel.getMerchantDescription());
 
-        ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
-        Picasso.with(this).load(merchantModel.getLogoUrl().toString()).into(merchantImage);
-
-
+        if (merchantModel.getLogoUrl() != null) {
+            ImageView merchantImage = (ImageView) findViewById(R.id.merchant_logo_iv);
+            Picasso.with(this).load(merchantModel.getLogoUrl().toString()).into(merchantImage);
+        }
 
         List<String> userAchievementsLabels = new ArrayList<>();
         for (UserAchievementModel userAchievementModel : merchantModel.getUserAchievementModels()) {
             userAchievementsLabels.add(userAchievementModel.getAchievementName());
         }
-
 
         for (MerchantLocModel merchantLocModel : merchantModel.getMerchantLocModels()) {
             longs.add(merchantLocModel.getLon());
