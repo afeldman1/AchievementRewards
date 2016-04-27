@@ -62,7 +62,7 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
                 progressBar.setVisibility(View.GONE);
                 DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
                 DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getApplicationContext());
-                redeemedAtTv.setText(R.string.redeemedOn + dateFormat.format(userAchievementModel.getRedeemedAt()) + " " + timeFormat.format(userAchievementModel.getRedeemedAt()));
+                redeemedAtTv.setText(this.getString(R.string.redeemedOn) + " " + dateFormat.format(userAchievementModel.getRedeemedAt()) + " " + timeFormat.format(userAchievementModel.getRedeemedAt()));
                 redeemedAtTv.setVisibility(View.VISIBLE);
             }
         }
@@ -103,7 +103,7 @@ public class AchievementDetailsActivity extends NavigationViewActivity {
             DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getApplicationContext());
 
             TextView redeemedAtTv = (TextView) findViewById(R.id.redeemed_at_tv);
-            redeemedAtTv.setText(R.string.redeemedOn + dateFormat.format(redeemedAt) + " " + timeFormat.format(redeemedAt));
+            redeemedAtTv.setText(this.getString(R.string.redeemedOn) + " " + dateFormat.format(redeemedAt) + " " + timeFormat.format(redeemedAt));
             redeemedAtTv.setVisibility(View.VISIBLE);
         }
     }
