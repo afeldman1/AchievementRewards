@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="50"
         android:layout_below="@id/avail_text"
-        android:id="@+id/avail_list"/>
+        android:id="@+id/avail_list" />
 
     <TextView
         android:layout_width="match_parent"
@@ -31,8 +31,7 @@
         android:layout_marginBottom="10dp"/>
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_height="305dp"
         android:layout_below="@id/on_way_text"
         android:id="@+id/on_way_list" />
 </LinearLayout>

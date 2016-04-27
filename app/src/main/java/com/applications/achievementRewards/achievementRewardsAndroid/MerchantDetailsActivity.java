@@ -22,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
@@ -49,8 +50,7 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchant_details);
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
 
         Intent intent = getIntent();
 
@@ -88,6 +88,9 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
             lats.add(merchantLocModel.getLat());
             addresses.add(merchantLocModel.getAddress());
         }
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         location = true;
 
@@ -129,9 +132,16 @@ public class MerchantDetailsActivity extends NavigationViewActivity implements O
             if (lats.get(i) != null && lats.get(i) != 0 && longs.get(i) != null && longs.get(i) != 0) {
                 LatLng position = new LatLng(lats.get(i),longs.get(i));
                 if (addresses.get(i) != null && addresses.get(i) != ""){
-                    mMap.addMarker(new MarkerOptions().position(position).title(addresses.get(i)));
+                    mMap.addMarker(new MarkerOptions()
+                            .position(position)
+                            .title(addresses.get(i))
+                            .icon(BitmapDescriptorFactory.defaultMarker(135)));
                 } else {
-                    mMap.addMarker(new MarkerOptions().position(position).title(title));
+                    mMap.addMarker(new MarkerOptions()
+                            .position(position)
+                            .title(title)
+                            .icon(BitmapDescriptorFactory.defaultMarker(135)));
+
                 }
                 if (count == 0) {
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
